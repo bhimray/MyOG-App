@@ -1,18 +1,98 @@
+
 .sc-wrapper{
     display:grid;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    top:1rem;
+    position: relative;
 }
-.sc-status{
+.sc-wrapper-card {
+    margin: 1.2rem;
+    position: relative;
+}
+.sc-status {
     display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    /* justify-content: flex-end; */
+    background-color: #45979626;
+    /* text-align: end; */
+    width: -moz-fit-content;
+    width: fit-content;
+    top: -1.73rem;
+    right: 1rem;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
+    padding: 0.2rem 0.5rem;
+    box-shadow: 0px 5px 14px 4px rgb(0 0 255 / 44%);
 }
-.sc-wrapper-partition{
-    display:flex;
+.sc-wrapper-partition {
+    display: flex;
     justify-content: space-around;
+    background-color: #45979626;
+    padding: 1.2rem;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 14px 4px rgb(0 0 255 / 20%);
+}
+.sc-review-dist {
+    display: grid;
+    justify-content: space-around;
+    background-color: #e2c008d9;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 14px 4px rgb(0 0 255 / 20%);
+}
+.sc-review {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0rem 1rem;
+}
+.sc-star {
+    width: 1rem;
+}
+.sc-dist{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap:0.4rem;
+}
+.sc-dist-text{
+
+}
+.sc-dist-icon {
+    width: 1.5rem;
+}
+.sc-name-address-photo-service{
+    display:grid;
+    justify-content: space-around;
+    align-items: center;
+}
+.sc-name-address-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sc-name-address {
+    display: grid;
+    justify-content: flex-end;
+    text-align: justify;
+    padding: 0rem 0.5rem;
+}
+.sc-name{
+
+}
+.sc-address{
+
+}
+.sc-photo{
+    width:6rem;
+}
+.sc-service-type{
+    padding-top:1rem;
 }
 /* 
-sc-review-dist
-sc-review
+
+
 sc-dist
 sc-dist-text
 sc-dist-icon

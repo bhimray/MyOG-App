@@ -1,4 +1,7 @@
 
+.mn-main-wrapper {
+    position: fixed;
+}
 .mob-nav-wrapper {
     padding-bottom: 2rem;
     border-bottom: 0.1rem solid;
@@ -98,6 +101,11 @@
     padding:0.8rem 1rem;
     background-color: brown;
     border-radius: 10%;
+}
+
+.mn-seller-card {
+    position: relative;
+    overflow: auto;
 }
 
 /* .icon {

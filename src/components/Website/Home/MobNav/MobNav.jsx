@@ -26,7 +26,7 @@ const MobNav = (props) => {
     }
   }
   return (
-    <>
+    <div className='mn-main-wrapper'>
     <div className='mob-nav-wrapper'>
       <div className='mn-circle-container'>
         <div className="mn-circle-background"></div>
@@ -47,7 +47,7 @@ const MobNav = (props) => {
       </div>
     </div>
     <div className='mn-seller-card'>{props.sellerCard}</div>
-    </>
+    </div>
   )
 }
 
