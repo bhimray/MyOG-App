@@ -1,0 +1,50 @@
+
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.landing-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.l-my {
+    display: flex;
+    font-size: 4rem;
+    font-weight: 800;
+    color: brown;
+    position: absolute;
+    top: -5rem;
+    right: 4rem;
+}
+.l-o {
+    display: flex;
+    /* font-size: 20rem; */
+    /* font-weight: 800; */
+    color: #051031;
+    position: absolute;
+    z-index: -1;
+    /* top: 6rem; */
+    /* right: 4rem; */
+    border: 5rem solid midnightblue;
+    border-radius: 50%;
+    border-style: groove;
+    height: 8rem;
+    width: 8rem;
+    outline: 1rem #a79d15ab groove;
+}
+
+.l-garage {
+    display: flex;
+    font-size: 4rem;
+    font-weight: 800;
+    color: brown;
+    position: absolute;
+    right: -12rem;
+    top: 3rem;
+}
