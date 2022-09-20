@@ -9,9 +9,9 @@ export const sellerData = [
       Rating:"4",
       serviceType:["bike", "car"],
       Address: [
-        "2 hours of excercises",
-        "Free consultaion to coaches",
-        "Access to The Community",
+        "Belhi",
+        "near: Goverment School",
+        "postal code:458001",
       ],
       Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
     },
@@ -23,9 +23,9 @@ export const sellerData = [
         Rating:"4",
         serviceType:["bike", "car", "Truck", "BUS"],
         Address: [
-          "2 hours of excercises",
-          "Free consultaion to coaches",
-          "Access to The Community",
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
         ],
         Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
       },
@@ -37,9 +37,9 @@ export const sellerData = [
         Rating:"4",
         serviceType:["bike", "car", "Truck", "BUS"],
         Address: [
-          "2 hours of excercises",
-          "Free consultaion to coaches",
-          "Access to The Community",
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
         ],
         Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
       },

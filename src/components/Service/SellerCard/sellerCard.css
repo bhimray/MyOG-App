@@ -1,0 +1,21 @@
+.sc-wrapper{
+    display:grid;
+    background-color: blueviolet;
+}
+.sc-status{
+    display: flex;
+    justify-content: flex-end;
+}
+.sc-wrapper-partition{
+    display:flex;
+    justify-content: space-around;
+}
+/* 
+sc-review-dist
+sc-review
+sc-dist
+sc-dist-text
+sc-dist-icon
+sc-name-address-service
+sc-name-address
+sc-service-type */
