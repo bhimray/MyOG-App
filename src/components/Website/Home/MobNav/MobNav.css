@@ -9,13 +9,13 @@
     display: flex;
     position: relative;
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
     /* width: 30rem; */
     overflow: hidden;
     /* width: fit-content; */
-    height: 12rem;
+    height: 8rem;
     /* width: 154vw; */
-    z-index: -1;
+    /* z-index: -1; */
     /* top: -14.7rem; */
     /* right: 38rem; */
 }
@@ -36,7 +36,7 @@
 .mn-nav-content {
     position: relative;
     z-index: 1;
-    top: -10rem;
+    top: -6rem;
 }
 
 .mn-search-location-wrapper{

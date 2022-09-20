@@ -10,24 +10,7 @@ import SellerCard from './components/Service/SellerCard/SellerCard'
 
 function App() {
 
-  const [showPlaceHolder, setPlaceHolder] = React.useState(false)
   const [screenWidth, setScreenWidth] = React.useState(true)
-
-  const elementRef = React.useRef()
-  const setshowPlaceHolder=(event)=>{
-    // const target = event.currentTarget.className
-    const target = elementRef.current.className
-    console.log("target app div", target)
-    // const element = document.getElementsByClassName(target)
-
-    // console.log(element[0].nodeName, "element") if you get the element then you can draw nodeName from there
-
-    if (target == "mainDiv"){
-      setPlaceHolder(true)
-    }else{
-      setPlaceHolder(false)
-    }
-  }
 
   React.useEffect(()=>{
     console.log("useEffect is running")
@@ -37,9 +20,9 @@ function App() {
   },[screenWidth])
   return (
     <div className="App" >
-      <div ref={elementRef} className="mainDiv" onClick={setshowPlaceHolder}>
+      <div className="mainDiv">
         {/* <LandingPage/> */}
-        <HomePage navi={screenWidth ? <MobNav showPlaceHolder={showPlaceHolder}/> : <ComNav/>} />
+        <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} />
       </div>
     </div>
   );
