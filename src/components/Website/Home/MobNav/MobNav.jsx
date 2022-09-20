@@ -4,6 +4,9 @@ const MobNav = () => {
   const dropDown = "<"
   return (
     <div className='mob-nav-wrapper'>
+      <div className='mn-circle-container'>
+        <div className="mn-circle-background"></div>
+      </div>
       <div className='mn-garage-symbol-wrapper'>
         <div className='mn-symbol'>MyOG</div>
         <div className='mn-dropDown'>{dropDown}</div>

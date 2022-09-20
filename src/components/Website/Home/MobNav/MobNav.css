@@ -1,6 +1,33 @@
 
 .mob-nav-wrapper{
-    background-color: white;
+    padding:1rem;
+    padding-bottom:2rem;
+    border-bottom:0.1rem solid;
+    position: relative;
+
+}
+.mn-circle-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    /* width: 30rem; */
+    overflow: hidden;
+    /* width: fit-content; */
+    height: 12rem;
+    /* width: 154vw; */
+}
+
+.mn-circle-background {
+    display: flex;
+    position: absolute;
+    background-color: burlywood;
+    height: 40rem;
+    width: 41rem;
+    border-radius: 50%;
+    top: -32rem;
+    /* left: -8rem; */
+    /* position: relative; */
 }
 .mn-search-location-wrapper{
     display:flex;
