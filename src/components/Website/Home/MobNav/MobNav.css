@@ -1,34 +1,44 @@
 
-.mob-nav-wrapper{
-    padding:1rem;
-    padding-bottom:2rem;
-    border-bottom:0.1rem solid;
+.mob-nav-wrapper {
+    padding-bottom: 2rem;
+    border-bottom: 0.1rem solid;
     position: relative;
-
+    height: 7rem;
 }
 .mn-circle-container {
     display: flex;
     position: relative;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     /* width: 30rem; */
     overflow: hidden;
     /* width: fit-content; */
     height: 12rem;
     /* width: 154vw; */
+    z-index: -1;
+    /* top: -14.7rem; */
+    /* right: 38rem; */
 }
 
 .mn-circle-background {
     display: flex;
     position: absolute;
-    background-color: burlywood;
-    height: 40rem;
-    width: 41rem;
+    background-color: #171b2d;
+    height: 53rem;
+    width: 51rem;
     border-radius: 50%;
     top: -32rem;
-    /* left: -8rem; */
+    left: -13rem;
     /* position: relative; */
+    top: -45rem;
 }
+
+.mn-nav-content {
+    position: relative;
+    z-index: 1;
+    top: -10rem;
+}
+
 .mn-search-location-wrapper{
     display:flex;
     justify-content: space-around;
@@ -41,21 +51,62 @@
     border:0.1rem solid black;
     padding:0rem 2rem;
     border-radius:1rem;
+    background-color: white;
 }
 .mn-search-bar-field{
     outline: none;
     border: none;
     height: 2.5rem;
     border-radius: 0.1rem;
+    font-size: 1.2rem;
 }
-.mn-search-icon{
-    position:absolute;
+.mn-search-icon {
+    position: absolute;
     display: flex;
-    top:0.5rem;
-    left:0rem;
+    justify-content: center;
+    top: 0.35rem;
+    left: 0.2rem;
+    width: 1.3rem;
+    align-items: center;
+    /* background-color: #d18d31; */
+    padding: 0.3rem 0rem;
+    /* filter: blur(34.8px); */
+    opacity:0.5;
 }
-.mn-search-filter{
-    position:absolute;
-    top:0.5rem;
-    right:0rem;
+.mn-search-filter {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.5rem;
 }
+.sort-down-solid{
+    width:1rem;
+    color:darkblue;
+}
+
+.mn-symbol{
+    font-size: large;
+    font-weight: 800;
+    color:aliceblue;
+}
+.mn-garage-symbol-wrapper{
+    
+}
+
+.mn-location-symbol{
+    width:1rem;
+    padding:0.8rem 1rem;
+    background-color: brown;
+    border-radius: 10%;
+}
+
+/* .icon {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    
+    -webkit-mask: url(../../../../svgIcons/sort-down-solid.svg) no-repeat 50% 50%;
+    mask: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/18515/heart.svg) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+  } */
