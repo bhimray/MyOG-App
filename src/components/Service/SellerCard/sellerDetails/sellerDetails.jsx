@@ -7,7 +7,8 @@ import streetViewSolid from '../../../../svgIcons/street-view-solid.svg'
 import starRegular from '../../../../svgIcons/star-regular.svg'
 import { Avatar } from 'react-lorem-ipsum'
 import BackIcon from '../../../../svgIcons/square-left-solid.svg'
-
+import messageIcon from '../../../../svgIcons/message-regular.svg'
+import {Link} from 'react-router-dom'
 const male = ()=> Avatar('all');
 
 const SellerDetails = () => {
@@ -25,7 +26,7 @@ const SellerDetails = () => {
                         <img src={starRegular} alt="" className="sd-review-icon" />
                         <div className="sd-rating">{garageOwner.Rating}</div>
                     </div>
-                    <img src={BackIcon} alt="" className="sd-backicon" />
+                    <Link to="/"><img src={BackIcon} alt="" className="sd-backicon" /></Link>
                 </div>
             </div>
             <div className='sd-profile'>
@@ -89,10 +90,11 @@ const SellerDetails = () => {
             </div>
         </div>
         <div className='sd-call-msg-owner'>
-            <div className='sd-call'>
-                {console.log("sd-call")}
-            </div>
             <div className='sd-msg'>
+                <img src={messageIcon} alt="" className="sd-msg-icon" />
+                <div className="sd-msg-icon-text">chat with us</div>
+            </div>
+            <div className='sd-call'>
 
             </div>
             <div className='sd-owner'>

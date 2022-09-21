@@ -34,7 +34,7 @@ const MobNav = (props) => {
       <div className='mn-nav-content'>
         <div className='mn-garage-symbol-wrapper'>
           <div className='mn-symbol'>MyOG</div>
-          <img src={sortDownSolid} alt="" className='sort-down-solid' />
+          {/* <img src={sortDownSolid} alt="" className='sort-down-solid' /> */}
         </div>
         <div className='mn-search-location-wrapper'>
         <img src={locationDotSolid} alt="" className='mn-location-symbol'/>
