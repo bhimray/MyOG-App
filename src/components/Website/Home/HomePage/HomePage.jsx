@@ -8,6 +8,7 @@ const HomePage = (children) => {
       {/* <SellerCard/>
       <Filter/> */}
       {children.navi}
+      {children.modal}
     </div>
   )
 }
