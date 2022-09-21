@@ -26,7 +26,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} />}/>
-          <Route path='garage-details' element={<SellerDetails/>}/>
+          <Route path='/garage/:id' element={<SellerDetails/>}/>
         </Routes>
       </BrowserRouter>
     </div>

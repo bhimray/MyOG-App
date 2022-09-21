@@ -7,6 +7,7 @@ import motorcyleSolid from '../../../../svgIcons/motorcycle-solid.svg'
 import carSolid from '../../../../svgIcons/car-solid.svg'
 import busSolid from '../../../../svgIcons/bus-solid.svg'
 import truckSolid from '../../../../svgIcons/truck-solid.svg'
+import {Link} from 'react-router-dom'
 
 console.log('sellerCardData', sellerData)
 const SellerCard = () => {
@@ -18,7 +19,7 @@ const SellerCard = () => {
         sellerData.map((data)=>{
           console.log(data.image.props.src)
           return(         
-          <div className='sc-wrapper-card'>
+          <Link to={`/garage/${data.id}`} key={data.id} className='sc-wrapper-card' >
           <div className='sc-status'>
             {data.status}
           </div>
@@ -88,7 +89,7 @@ const SellerCard = () => {
               </div>
             </div>
           </div>
-          </div>
+          </Link>
         ) 
         }
       )
