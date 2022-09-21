@@ -7,6 +7,8 @@ import MobNav from './components/Website/Home/MobNav/MobNav';
 import LandingPage from './components/Website/Landing/LandingPage';
 import Map from './components/Website/Map/Map';
 import SellerCard from './components/Service/SellerCard/SellerCard/SellerCard'
+import SellerDetails  from './components/Service/SellerCard/sellerDetails/sellerDetails';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
@@ -18,14 +20,17 @@ function App() {
         setScreenWidth(false)
     }
   },[screenWidth])
+
   return (
     <div className="App" >
-      <div className="mainDiv">
-        {/* <LandingPage/> */}
-        <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} />}/>
+          <Route path='garage-details' element={<SellerDetails/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;
