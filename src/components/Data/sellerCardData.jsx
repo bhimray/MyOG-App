@@ -43,4 +43,154 @@ export const sellerData = [
         ],
         Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
       },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
+
+      {
+        image:Avatar('all'),
+        name: username(),
+        Distance: "20",
+        status:"open",
+        Rating:"4",
+        serviceType:["bike", "car", "Truck", "BUS"],
+        Address: [
+          "Belhi",
+          "near: Goverment School",
+          "postal code:458001",
+        ],
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+      },
   ];

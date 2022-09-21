@@ -105,7 +105,16 @@
 
 .mn-seller-card {
     position: relative;
-    overflow: auto;
+    overflow-y: scroll;
+    /* display: grid; */
+    /* justify-content: flex-start; */
+    /* scroll-snap-type: y mandatory; */
+    scrollbar-width: none;
+    /* scroll-snap-align: start; */
+    /* align-items: center; */
+    /* scroll-behavior: smooth; */
+    height: 100vh;
+    /* padding-bottom: 2rem; */
 }
 
 /* .icon {

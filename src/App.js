@@ -6,7 +6,7 @@ import HomePage from './components/Website/Home/HomePage/HomePage';
 import MobNav from './components/Website/Home/MobNav/MobNav';
 import LandingPage from './components/Website/Landing/LandingPage';
 import Map from './components/Website/Map/Map';
-import SellerCard from './components/Service/SellerCard/SellerCard'
+import SellerCard from './components/Service/SellerCard/SellerCard/SellerCard'
 
 function App() {
 

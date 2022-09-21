@@ -1,10 +1,20 @@
 
-.sc-wrapper{
-    display:grid;
-    /* background-color: blueviolet; */
-    top:1rem;
+.sc-wrapper {
     position: relative;
+    /* overflow-y: scroll; */
+    display: grid;
+    /* justify-content: flex-start; */
+    /* scroll-snap-type: y mandatory; */
+    scrollbar-width: none;
+    /* scroll-snap-align: start; */
+    /* align-items: center; */
+    scroll-behavior: smooth;
+    /* background-color: blueviolet; */
+    top: 1rem;
+    /* height: 100vh; */
+    padding-bottom: 14rem;
 }
+
 .sc-wrapper-card {
     margin: 1.2rem;
     position: relative;
@@ -68,27 +78,41 @@
     align-items: center;
 }
 .sc-name-address-photo {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    justify-content: flex-start;
     align-items: center;
 }
-.sc-name-address {
-    display: grid;
-    justify-content: flex-end;
-    text-align: justify;
+.sc-address-photo {
+    display: flex;
+    justify-content: flex-start;
+    text-align: start;
     padding: 0rem 0.5rem;
+    color: #3b1919de;
 }
 .sc-name{
-
+    font-size:1.2rem;
+    font-weight: 700;
 }
 .sc-address{
 
 }
-.sc-photo{
-    width:6rem;
+.sc-photo {
+    width: 6rem;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
-.sc-service-type{
-    padding-top:1rem;
+.sc-service-type {
+    padding-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 0.5rem;
+}
+.sc-service-icon{
+    width:1rem;
+}
+.sc-service-vehicle-type{
+
 }
 /* 
 
