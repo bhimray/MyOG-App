@@ -4,9 +4,10 @@
 }
 .mob-nav-wrapper {
     padding-bottom: 2rem;
-    border-bottom: 0.1rem solid;
+    /* border-bottom: 0.1rem solid; */
     position: relative;
     height: 7rem;
+    box-shadow: 0px 5px 20px 0px #0000ff57;
 }
 .mn-circle-container {
     display: flex;

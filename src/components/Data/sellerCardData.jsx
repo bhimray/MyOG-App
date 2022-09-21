@@ -1,6 +1,8 @@
 import React from "react";
 import LoremIpsum,{fullname, username, Avatar} from "react-lorem-ipsum";
 
+let currentDate= new Date()
+console.log(currentDate.getDate(), 'currentDate')
 function getRandumNumber(length) {
   const min = Math.pow(10, (length-1));
   const max = Math.pow(10, (length));
@@ -22,7 +24,7 @@ export const sellerData = [
         "postal code:458001",
       ],
       Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
-      Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>}]
+      Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
     },
     { 
         id:2,
@@ -38,7 +40,10 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
+      
       },
       { 
         id:3,
@@ -54,7 +59,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       { 
@@ -71,7 +78,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       { 
@@ -88,7 +97,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       { 
@@ -105,7 +116,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -122,7 +135,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -139,7 +154,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -156,7 +173,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -173,7 +192,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -190,7 +211,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -207,7 +230,9 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
 
       {
@@ -224,6 +249,8 @@ export const sellerData = [
           "near: Goverment School",
           "postal code:458001",
         ],
-        Description:React.createElement('div', {}, <LoremIpsum p={1}/>)
+        Description:React.createElement('div', {}, <LoremIpsum p={1}/>),
+        Feedback:[{name:username(), profile:"akdk", feedback:<LoremIpsum p={1}/>, date:currentDate}, {name:username(), feedback:<LoremIpsum p={1}/>},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate},{name:username(), feedback:<LoremIpsum p={1}/>, date:currentDate}]
+
       },
   ];

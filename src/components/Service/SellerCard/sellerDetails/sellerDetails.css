@@ -1,0 +1,183 @@
+.sd-seller-deatils{
+    display: grid;
+    position: relative;
+    gap:1rem;
+}
+
+.sd-profile-photo-name-review{
+    display:grid;
+    position: relative;
+}
+.sd-review-backicon {
+    /* display: flex; */
+    /* top: 0rem; */
+    /* background-color: aquamarine; */
+    /* justify-content: space-between; */
+    /* padding: 0rem 1rem; */
+    position: absolute;
+    width: 100vw;
+}
+.sd-review-backicon-1 {
+    display: flex;
+    /* background-color: aquamarine; */
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    position: relative;
+}
+.sd-backicon{
+    position: relative;
+    width:1.8rem;
+}
+.sd-review {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    /* width: 1rem; */
+    background-color: gold;
+    padding: 0.2rem;
+    border-radius: 0.4rem;
+}
+.sd-review-icon{
+    width:1rem;
+}
+.sd-profile-photo{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    /* position: fixed; */
+    overflow: hidden;
+    width:100vw;
+    
+}
+
+.sd-name-address {
+    display: grid;
+    justify-content: flex-end;
+    text-align: right;
+    color: white;
+    position: absolute;
+    bottom: 0rem;
+    right: 0rem;
+    background: linear-gradient(to top, #0000ff8a, #6c1b29a3);
+    width: 100vw;
+}
+
+
+.sd-name{
+
+}
+.sd-address{
+    display: grid;
+}
+
+.sd-phone-dist {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    background-color: gold;
+    border-radius: 1rem;
+    margin: 1rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
+    z-index: 99;
+}
+
+.sd-phone{
+    display: flex;
+    gap:0.5rem;
+}
+.sd-dist{
+    display:flex;
+    gap:0.5rem;
+}
+.sd-phone-icon{
+    width:1rem;
+}
+.sd-dist-icon{
+    width:1rem;
+}
+
+.sd-photos{
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
+    width: 100vw;
+}
+.sd-photo{
+    display:flex;
+    position: relative;
+    overflow-x:scroll;
+    scroll-behavior: smooth;
+}
+.sd-avatar-photo{
+  padding:0rem 1rem;
+  border-color:darkblue;
+  border-radius: 1rem;
+}
+.sd-photo::-webkit-scrollbar{
+    display: none;
+}
+
+.sd-description {
+    display: grid;
+    padding: 1rem;
+}
+.sd-description-head{
+    display:flex;
+    font-size:2rem;
+    font-weight:800;
+}
+.sd-description-details{
+    text-align: start;
+    font-size:large;
+}
+.sd-feedback {
+    display: grid;
+    padding: 1rem;
+}
+.sd-feedback-head{
+    display:flex;
+    font-size:2rem;
+    font-weight:800;
+}
+
+.sd-feedback-details {
+    display: grid;
+    gap: 2rem;
+    font-size: large;
+}
+.sd-feedback-wrapper{
+    display:grid;
+}
+.sd-feedback-name-feedback {
+    display: grid;
+    padding: 0.2rem;
+    
+    background-color: #cfe1d094;
+    box-shadow: 0px 5px 14px 4px rgb(0 0 255 / 16%);
+    border-radius: 0.5rem;
+}
+.sd-feedback-date {
+    display: flex;
+    /* flex-direction: row-reverse; */
+    /* justify-content: flex-end; */
+    width: -moz-fit-content;
+    width: fit-content;
+    position: relative;
+    box-shadow: 0px -2px 20px 0px rgb(0 0 255 / 44%);
+    left: 1rem;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    padding: 0.2rem;
+}
+.sd-feeder-name{
+    display: flex;
+    text-align: start;
+    font-weight: 800;
+}
+.sd-feedback-feedback{
+    display:flex;
+    text-align: left;
+}

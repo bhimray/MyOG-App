@@ -17,7 +17,7 @@ const SellerCard = () => {
     <div className='sc-wrapper'>
       {
         sellerData.map((data)=>{
-          console.log(data.image.props.src)
+          // console.log(data.image.props.src)
           return(         
           <Link to={`/garage/${data.id}`} key={data.id} className='sc-wrapper-card' >
           <div className='sc-status'>

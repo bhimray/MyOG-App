@@ -31,8 +31,9 @@ body{
   color: #61dafb;
 }
 
-link{
+a{
   text-decoration: none;
+  color:inherit;
 }
 
 @keyframes App-logo-spin {
