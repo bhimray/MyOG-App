@@ -1,7 +1,7 @@
 .gf-wrapper {
     display: grid;
     position: absolute;
-    top: 8rem;
+    top: -7rem;
     /* left: 2rem; */
     width: 100vw;
     height: fit-content;
@@ -10,6 +10,9 @@
     z-index: 9999;
     /* padding: 0rem 0.5rem; */
     border-radius: 1rem 1rem 0rem 0rem;
+}
+.gf-wrapper-hide{
+    display:none;
 }
 .gf-go-back-button {
     display: flex;

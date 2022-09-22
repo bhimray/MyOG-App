@@ -11,6 +11,7 @@ import SellerDetails  from './components/Service/SellerCard/sellerDetails/seller
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClientOrGarage from './components/Service/Registration/ClientOrGarage';
 import DecidingModal from './components/Log/DecidingModal';
+import GarageForm from './components/Service/Registration/GarageForm';
 
 function App() {
 
@@ -60,7 +61,8 @@ function App() {
           <LandingPage/>
           }/>
           <Route path='/garage/:id' element={<SellerDetails/>}/>
-          <Route path='/client-or-gara' element={<ClientOrGarage/>}/>
+          <Route path='/garage-form' element={<GarageForm/>}/>
+          <Route path='/client-or-garage' element={<ClientOrGarage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

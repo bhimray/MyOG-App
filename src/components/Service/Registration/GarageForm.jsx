@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import squareLeftSolid from '../../../svgIcons/square-left-solid.svg'
 import './GarageForm.css'
 import {Link} from 'react-router-dom'
-const GarageForm = () => {
+
+const GarageForm = ({toggleState}) => {
+    let outerFormState= toggleState
+    const [innerFormState, setInnerFormState] = useState(false)
+
+    const changeInnerFormState=()=>{
+        setInnerFormState(!innerFormState)
+        console.log(innerFormState)
+    }
+    console.log("true",innerFormState==true && outerFormState==true, 'false', innerFormState==false && outerFormState==false)
   return (
     <div>
-        <div className="gf-wrapper">
-            <Link to='/client-or-garage' className="gf-go-back-button">
+        <div className={(innerFormState==true && outerFormState==true) ||(innerFormState==false && outerFormState==false) ?'gf-wrapper':"gf-wrapper-hide"}>
+            <div onClick={()=>changeInnerFormState()} className="gf-go-back-button">
                 <div className="gf-go-back">
                     Go Back
                 </div>
                 <img src={squareLeftSolid} alt="" className="gf-go-back-icon" />
-            </Link>
+            </div>
             <form action="" className="gf-form-wrapper">
                 <div className="gf-field">
                     <input type="tel" id="gf-mobile" name="mobile" pattern='[0-9]{10}' />
