@@ -2,7 +2,12 @@ import React from 'react'
 
 const ClientOrGarage = (props) => {
   let user;
-  if (props.client == 'client'){user=true}else{user=false}
+  if (props.client == 'client'){
+    user=true
+  }else{
+    user=false
+  }
+  console.log('user', user)
   return (
     <div>
       <div>LogIn</div>

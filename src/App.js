@@ -26,23 +26,29 @@ function App() {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isLandingPageDisplayed, setLandingPageDisplayed] = useState(false)
 
-  React.useEffect(() => {
-    setInterval(() => {
-    setIsDisplayed(true); 
-  }, 11000);
-  }, []);
+  // React.useEffect(() => {
+  //   setInterval(() => {
+  //   setIsDisplayed(true); 
+  // }, 11000);
+  // }, []);
+
+  // React.useEffect(() => {
+  //   setInterval(() => {
+  //   setLandingPageDisplayed(true); 
+  // }, 0);
+  // }, []);
 
   React.useEffect(() => {
     setInterval(() => {
     setLandingPageDisplayed(true); 
-  }, 0);
+  }, 3000);
   }, []);
 
-  React.useEffect(() => {
-    setTimeout(() => {
-    setLandingPageDisplayed(true); 
-  }, 10000);
-  }, []);
+  if (isLandingPageDisplayed == true){
+    setInterval(() => {
+      setIsDisplayed(true); 
+    }, 2000);
+  }
 
   return (
     <div className="App" >
@@ -50,7 +56,7 @@ function App() {
         <Routes>
           <Route path="/" element={
           isLandingPageDisplayed?
-          <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} modal={isDisplayed? <DecidingModal/>:null} />:
+          <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} decidingModal={isDisplayed? <DecidingModal/>:null} />:
           <LandingPage/>
           }/>
           <Route path='/garage/:id' element={<SellerDetails/>}/>
