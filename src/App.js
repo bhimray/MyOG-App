@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClientOrGarage from './components/Service/Registration/ClientOrGarage';
 import DecidingModal from './components/Log/DecidingModal';
 import GarageForm from './components/Service/Registration/GarageForm';
+import ClientLogin from './components/Client/ClientLogin';
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
           <Route path='/garage/:id' element={<SellerDetails/>}/>
           <Route path='/garage-form' element={<GarageForm/>}/>
           <Route path='/client-or-garage' element={<ClientOrGarage/>}/>
+          <Route path='/client-google-auth' element={<ClientLogin/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import GoogleLogin from 'react-google-login'
 
 const ClientLogin = () => {
+
+  
   return (
-    <div>ClientLogin</div>
+    <div>
+      <div className="cl-google-auth">Client google auth</div>
+    </div>
   )
 }
 
