@@ -13,6 +13,7 @@ import ClientOrGarage from './components/Service/Registration/ClientOrGarage';
 import DecidingModal from './components/Log/DecidingModal';
 import GarageForm from './components/Service/Registration/GarageForm';
 import ClientLogin from './components/Client/ClientLogin';
+import CurrentPosition from './components/Website/Map/currentPosition';
 
 function App() {
 
@@ -54,19 +55,21 @@ function App() {
 
   return (
     <div className="App" >
-      <BrowserRouter>
+      <CurrentPosition/>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={
           isLandingPageDisplayed?
           <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} decidingModal={isDisplayed? <DecidingModal/>:null} />:
           <LandingPage/>
           }/>
+          <Route path='/home' element={<HomePage/>}/>
           <Route path='/garage/:id' element={<SellerDetails/>}/>
           <Route path='/garage-form' element={<GarageForm/>}/>
           <Route path='/client-or-garage' element={<ClientOrGarage/>}/>
           <Route path='/client-google-auth' element={<ClientLogin/>}/>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   )
 }
