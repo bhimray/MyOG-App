@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const WorkDetailsDB = require('./workDetailsDB');
 
 const usersDBSchema = new mongoose.Schema({
     Name: {type:String},
@@ -13,10 +12,10 @@ const usersDBSchema = new mongoose.Schema({
         date:String,
         garageName:String,
         status:{
-            canceledBy:String,
-            type: String,
+            status: String,
             enum : ['ORDER-PLACED','ORDER-CANCELED']
         },
+        canceledBy:String
     },
     { timestamps: true }]
 },
