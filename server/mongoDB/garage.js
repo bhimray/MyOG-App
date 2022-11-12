@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const usersDBSchema = new mongoose.Schema({
+const garageUsersSchema = new mongoose.Schema({
     Name: {type:String},
     Owner: {type:String},
     Email: {type:String},
@@ -26,6 +26,6 @@ const usersDBSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-const UsersDB = mongoose.model('usersDB', usersDBSchema)
+const UsersDB = mongoose.model('usersDB', garageUsersSchema)
 
 module.exports = UsersDB

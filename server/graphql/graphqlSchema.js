@@ -10,6 +10,16 @@ type Customer{
     cancelReason:String
     FeedBack:String
 }
+input CustomerInput{
+    latitude:String
+    longitude:String
+    date:String
+    status:String
+    canceledBy:String
+    cancelReason:String
+    FeedBack:String
+}
+
 type garageData{
     Name: String
     Owner: String
@@ -19,6 +29,17 @@ type garageData{
     ServiceType:[String]
     OpeningClosingTime:[String]
     Customer:[Customer]
+}
+
+input garageDataInput{
+    Name: String
+    Owner: String
+    Email: String
+    Mobile: String
+    Password: String
+    ServiceType:[String]
+    OpeningClosingTime:[String]
+    Customer:[CustomerInput]
 }
 type Status{
     status:String
@@ -39,12 +60,12 @@ type userData{
     History:[history]
 
 }
-Input userLogin{
+input userLogin{
     Name:String,
     Email:String,
     Password:String,
 }
-Input singleGarageInfo{
+input singleGarageInfo{
     garageName:String,
     garageId:String
 }
@@ -52,6 +73,11 @@ type privateData{
     Email:String,
     Token:String,
     TokenExpirationTime:String
+}
+input tuneDataInput{
+    userEmail:String
+    latitude:String
+    logitude:String
 }
 type tuneData{
     userEmail:String
@@ -69,8 +95,8 @@ type RootQuery {
 
 type RootMutation {
   createUser(userInput:userLogin):privateData
-  createGarage(gargeData:garageData):garageData
-  tuneAlarm(tuneData:tuneData):tuneData
+  createGarage(garageData:garageDataInput):garageData
+  tuneAlarm(tuneData:tuneDataInput):tuneData
 }
 
 
