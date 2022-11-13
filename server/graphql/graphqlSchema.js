@@ -70,7 +70,7 @@ input singleGarageInfo{
     garageId:String
 }
 type privateData{
-    Email:String,
+    UserId:String,
     Token:String,
     TokenExpirationTime:String
 }

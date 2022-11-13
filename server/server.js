@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
-
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser') 
 // middlewareconst express = require('express')
 const bodyParser = require('body-parser')
 const {graphqlHTTP} = require('express-graphql')
@@ -37,7 +38,18 @@ app.use((req, res, next) => {
 });
 
 app.use('/',
-graphqlHTTP({
+  // bodyParser.json(),
+  // cookieParser(),
+  // (req, next)=>{
+  //   try{
+  //     const {userId} = jwt.verify(req.cookies.id, process.env.JWT_SECRET);
+  //     req.userId = userId;
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // },
+  graphqlHTTP({
+    // context:{res, userId:req.userId},
     schema:graphqlSchema,
     rootValue:graphqlResolver,
     customFormatErrorFn:err=>{
@@ -49,7 +61,7 @@ graphqlHTTP({
         return err; // cathing the err caused during try{}
       }
     },
-    graphiql:true,
+  graphiql:true,
 
 }))
 app.listen(port, (err)=>{console.log("server is listening"); if (err) console.log(err, "==== error occurred")})

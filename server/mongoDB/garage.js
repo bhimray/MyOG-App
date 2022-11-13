@@ -26,6 +26,6 @@ const garageUsersSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-const UsersDB = mongoose.model('usersDB', garageUsersSchema)
+const garageDB = mongoose.model('garageDB', garageUsersSchema)
 
-module.exports = UsersDB
+module.exports = garageDB

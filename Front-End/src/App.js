@@ -55,7 +55,8 @@ function App() {
 
   return (
     <div className="App" >
-      <CurrentPosition/>
+      <Map/>
+      {/* <CurrentPosition/> */}
       {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={
