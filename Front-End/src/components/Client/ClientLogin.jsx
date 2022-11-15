@@ -67,6 +67,22 @@ const ClientLogin = () => {
     
     // {inputValue?.re_enter_password !== inputValue?.password ?
   }
+
+  /* global google */
+  function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+    }
+  window.onclick= function () {
+  google.accounts.id.initialize({
+      client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+  });
+  google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "dark", size: "medium" }  // customization attributes
+  );
+  google.accounts.id.prompt(); // also display the One Tap dialog
+  }
   return (
     <div>
         <div className="cl-main-container">
@@ -111,7 +127,7 @@ const ClientLogin = () => {
                   <button className="btn">Sign Up</button>
                 </div>
                 <div className="googleAuth">
-                  <GoogleAuth/>
+                  <div id='buttonDiv' >Sign Up with Google</div>
                 </div>
                 <div className="cl-redirect-login">
                   <div>Already registered? <Link to="" style={{"color":"darkblue"}}>Login</Link></div>
