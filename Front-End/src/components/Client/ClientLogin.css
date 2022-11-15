@@ -1,0 +1,97 @@
+.cl-main-container{
+
+}
+.cl-background {
+    display: grid;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+.cl-background-img{
+    background-image: url("../../images/OrgCoral.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50vh;
+    position: relative;
+    bottom: 5rem;
+}
+.form-container {
+    position: relative;
+    background-color: rgb(209 182 182 / 70%);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    opacity: 1;
+    height: fit-content;
+    border-radius: 2rem;
+    top: -18rem;
+    display: grid;
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 0rem;
+    padding-bottom: 5rem;
+}
+.signup-form {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    height: fit-content;
+}
+.cl-input-labels{
+    display:grid;
+    margin-top: 0.5rem;
+}
+.cl-input-labels>label{
+    text-align: start;
+}
+.cl-input-labels>div>input, .cl-input-labels>input {
+    border: none;
+    border-bottom: 0.2rem solid black;
+    /* text-align: start; */
+    /* height: 2rem; */
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    color: black;
+    outline: none;
+    line-height: 0px;
+    padding-top: 1rem;
+    color: #030334;
+}
+.cl-input-labels>div>img{
+    width: 1rem;
+    position: absolute;
+    background: bisque;
+    padding: 0.2rem;
+    border-radius: 50%;
+    box-shadow: 1px 2px 6px 2px #000000b8, -3px -4px 11px 4px white;
+}
+.btn{
+    border: none;
+    background: none;
+    background-color: darkblue;
+    padding: 0.8rem;
+    color: white;
+    border-radius: 0.2rem;
+}
+
+.cl-consent-tag{
+    padding-top: 1rem;
+    font-size: 1rem;
+    font-weight: 100;
+    font-style: italic;
+}
+.cl-consent{
+    display: flex;
+    justify-content: center;
+}
+
+.cl-form-outside-container{
+    padding: 0rem 1rem 0rem 1rem;
+    font-size: 1rem;
+    font-weight: 100;
+    font-style: italic;
+    /* height: fit-content; */
+    display: grid;
+    gap: 0.5rem;
+}

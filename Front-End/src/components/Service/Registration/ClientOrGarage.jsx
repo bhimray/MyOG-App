@@ -1,6 +1,6 @@
 import React, {useState, useReducer } from 'react'
 import {Link} from 'react-router-dom'
-import ClientLogin from '../../Client/ClientLogin';
+import ClientLogin from '../../Client/GoogleAuth';
 import GarageForm from './GarageForm';
 const ClientOrGarage = (props) => {
   console.log(props,"clientorgarage props")

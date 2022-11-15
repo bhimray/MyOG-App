@@ -8,8 +8,8 @@ const HomePage = (children) => {
       {/* <GarageForm/> */}
       {/* <SellerCard/>
       <Filter/> */}
-      {children.navi}
-      {/* {children.decidingModal} */}
+      {/* {children.navi} */}
+      {children.decidingModal}
     </div>
   )
 }
