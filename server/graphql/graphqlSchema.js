@@ -86,6 +86,7 @@ type tuneData{
 }
 
 type RootQuery {
+    
   userLogin(userLoginInput:userLogin):privateData
   garageLogin(garageLoginInput:userLogin):privateData
   userDetails(userLoginInput:userLogin):userData
@@ -94,6 +95,7 @@ type RootQuery {
 }
 
 type RootMutation {
+    googleAuth(token:String):privateData
   createUser(userInput:userLogin):privateData
   createGarage(garageData:garageDataInput):garageData
   tuneAlarm(tuneData:tuneDataInput):tuneData

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import {Link} from 'react-router-dom'
-import GoogleAuth from './GoogleAuth'
+import HandleCredentialResponse from './GoogleAuth'
 import './ClientLogin.css'
 import { useState } from 'react'
 import tick from "../../svgIcons/check-solid.svg"
@@ -69,17 +69,17 @@ const ClientLogin = () => {
   }
 
   /* global google */
-  function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-    }
+  // function handleCredentialResponse(response) {
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  //   }
   window.onclick= function () {
   google.accounts.id.initialize({
       client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
-      callback: handleCredentialResponse
+      callback: HandleCredentialResponse
   });
   google.accounts.id.renderButton(
       document.getElementById("buttonDiv"),
-      { theme: "dark", size: "medium" }  // customization attributes
+      { theme: "filled_blue", size: "large", width:"200px" , logo_alignment:"left", text:"Sign Up With Google"}  // customization attributes
   );
   google.accounts.id.prompt(); // also display the One Tap dialog
   }
