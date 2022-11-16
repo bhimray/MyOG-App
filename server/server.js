@@ -2,7 +2,6 @@ const express = require('express')
 const app = express();
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser') 
-// middlewareconst express = require('express')
 const bodyParser = require('body-parser')
 const {graphqlHTTP} = require('express-graphql')
 const mongoose = require('mongoose')

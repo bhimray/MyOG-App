@@ -1,5 +1,5 @@
 import React, { useReducer, useContext, useEffect } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import HandleCredentialResponse from './GoogleAuth'
 import './ClientLogin.css'
 import { useState } from 'react'
@@ -20,6 +20,7 @@ const SIGN_UP = gql`
 
 const ClientLogin = () => {
   const {login, token} = useContext(AuthContext)
+  const [signUpError, setError] = useState(null)
   const [matchPassword, setMatchPassword] = useState(false)
   
   const reducer=(inputValue, action)=>{
@@ -85,13 +86,13 @@ const ClientLogin = () => {
   google.accounts.id.initialize({
       client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
       callback: HandleCredentialResponse
-  });
+  })
+}
   google.accounts.id.renderButton(
       document.getElementById("buttonDiv"),
       { theme: "filled_blue", size: "large", width:"200px" , logo_alignment:"left", text:"Sign Up With Google"}  // customization attributes
   );
   google.accounts.id.prompt(); // also display the One Tap dialog
-  }
 
   // mutation
   const [SIGN_UP_MANUAL, { data, loading, error }] = useMutation(SIGN_UP, {
@@ -109,7 +110,11 @@ const ClientLogin = () => {
     };
   }, [data])
   if (loading) return <div>Loading sign up</div>;
-  
+  if (error) setError("Sign up error!!")
+  //
+  if (token){
+    return <Navigate to='/seller-card'/>
+  }else{
   return (
     <div>
         <div className="cl-main-container">
@@ -117,7 +122,7 @@ const ClientLogin = () => {
             <div className="cl-background-img"></div>
             <div className="form-container">
               <form action="" className="signup-form">
-                {/* <div className="cl-profile-photo"><img src="" alt="" /></div> */}
+                <div className="cl-profile-photo">{signUpError}</div>
                 <div className="cl-input-container">
                   <div className="cl-input-labels">
                     <label htmlFor="">Full Name</label>
@@ -153,7 +158,7 @@ const ClientLogin = () => {
                 <div className="cl-button">
                   <button onClick={(e)=>{e.preventDefault();SIGN_UP_MANUAL(); console.log("executing mutation")}} className="btn">Sign Up</button>
                 </div>
-                <div className="googleAuth" onClick={google_sign_in()}>
+                <div className="googleAuth" onClick={()=>google_sign_in()}>
                   <div id='buttonDiv'>Sign Up with Google</div>
                 </div>
                 <div className="cl-redirect-login">
@@ -165,6 +170,7 @@ const ClientLogin = () => {
         </div>
     </div>
   )
+}
 }
 
 export default ClientLogin

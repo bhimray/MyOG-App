@@ -66,7 +66,7 @@ function App() {
           <HomePage navi={screenWidth ? <MobNav sellerCard={<SellerCard/>} /> : <ComNav/>} decidingModal={isDisplayed? <DecidingModal/>:null} />:
           <LandingPage/>
           }/>
-          {/* <Route path='/home' element={<HomePage/>}/> */}
+          <Route path='/seller-card' element={<SellerCard/>}/>
           <Route path='/garage/:id' element={<SellerDetails/>}/>
           <Route path='/garage-form' element={<GarageForm/>}/>
           <Route path='/client-or-garage' element={<ClientOrGarage/>}/>
