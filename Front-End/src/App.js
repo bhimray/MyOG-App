@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClientOrGarage from './components/Service/Registration/ClientOrGarage';
 import DecidingModal from './components/Log/DecidingModal';
 import GarageForm from './components/Service/Registration/GarageForm';
-import GoogleAuth from './components/Client/GoogleAuth';
+// import GoogleAuth from './components/Client/GoogleAuth';
 import CurrentPosition from './components/Website/Map/currentPosition';
 
 
@@ -70,7 +70,7 @@ function App() {
           <Route path='/garage/:id' element={<SellerDetails/>}/>
           <Route path='/garage-form' element={<GarageForm/>}/>
           <Route path='/client-or-garage' element={<ClientOrGarage/>}/>
-          <Route path='/client-google-auth' element={<GoogleAuth/>}/>
+          {/* <Route path='/client-google-auth' element={<GoogleAuth/>}/> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import React, {useState, useReducer } from 'react'
 import {Link} from 'react-router-dom'
-import ClientLogin from '../../Client/GoogleAuth';
+import HandleCredentialResponse from '../../Client/GoogleAuth';
 import GarageForm from './GarageForm';
 const ClientOrGarage = (props) => {
   console.log(props,"clientorgarage props")
@@ -35,7 +35,7 @@ const ClientOrGarage = (props) => {
         {user ? <div onClick={()=>dispatch({type:"login"})} className={`${props.classNameClient}`}>SignUp</div>:<div onClick={()=>dispatch({type:"register"})} className={`${props.classNameClient}`}>Register</div>}
       </div>
       <div>
-        {state.login?<ClientLogin/>: (state.register? <GarageForm toggleState={state.toggleForm}/>:null)}
+        {state.login?<HandleCredentialResponse/>: (state.register? <GarageForm toggleState={state.toggleForm}/>:null)}
       </div>    
     </div>
   )

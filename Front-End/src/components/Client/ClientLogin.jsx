@@ -1,10 +1,25 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import HandleCredentialResponse from './GoogleAuth'
 import './ClientLogin.css'
 import { useState } from 'react'
 import tick from "../../svgIcons/check-solid.svg"
+import { gql, useMutation } from '@apollo/client';
+import { AuthContext } from '../context/localSotrage'
+
+
+const SIGN_UP = gql`
+  mutation createUser($name:String, $email:String, $password:String){
+  createUser(userInput:{Name:$name, Email:$email, Password:$password}){
+    UserId
+    Token
+    TokenExpirationTime
+	}
+}
+`;
+
 const ClientLogin = () => {
+  const {login, token} = useContext(AuthContext)
   const [matchPassword, setMatchPassword] = useState(false)
   
   const reducer=(inputValue, action)=>{
@@ -64,15 +79,9 @@ const ClientLogin = () => {
     }).catch(function(){
       console.log("it is rejected")
     })
-    
-    // {inputValue?.re_enter_password !== inputValue?.password ?
   }
-
   /* global google */
-  // function handleCredentialResponse(response) {
-  //   console.log("Encoded JWT ID token: " + response.credential);
-  //   }
-  window.onclick= function () {
+  function google_sign_in() {
   google.accounts.id.initialize({
       client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
       callback: HandleCredentialResponse
@@ -83,6 +92,24 @@ const ClientLogin = () => {
   );
   google.accounts.id.prompt(); // also display the One Tap dialog
   }
+
+  // mutation
+  const [SIGN_UP_MANUAL, { data, loading, error }] = useMutation(SIGN_UP, {
+    variables: {
+      "name":inputValue.fullname,
+      "email":inputValue.email,
+      "password":inputValue.password,
+    },
+  });
+  //
+  useEffect(() => {
+    if (data) {
+      console.log(data, "sign up returned data")
+      login(data)
+    };
+  }, [data])
+  if (loading) return <div>Loading sign up</div>;
+  
   return (
     <div>
         <div className="cl-main-container">
@@ -98,11 +125,11 @@ const ClientLogin = () => {
                   </div>
                   <div className="cl-input-labels">
                     <label htmlFor="">Email</label>
-                    <input value={inputValue.email} type="text" onChange={(e)=>handleInputChange(e,e.target.value, "email")}/>
+                    <input value={inputValue.email} type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' onChange={(e)=>handleInputChange(e,e.target.value, "email")}/>
                   </div>
                   <div className="cl-input-labels">
                     <label htmlFor="">Mobile Number</label>
-                    <input value={inputValue.mobilenumber} type="text" onChange={(e)=>handleInputChange(e,e.target.value, "mobilenumber")}/>
+                    <input value={inputValue.mobilenumber} type="text"  pattern='/^[7-9][0-9]{9}$/' onChange={(e)=>handleInputChange(e,e.target.value, "mobilenumber")}/>
                   </div>
                   <div className="cl-input-labels">
                     <label htmlFor="">Password</label>
@@ -124,10 +151,10 @@ const ClientLogin = () => {
                   <div className="cl-consent-tag">I agree with the <a href="">Terms of use</a></div>
                 </div>
                 <div className="cl-button">
-                  <button className="btn">Sign Up</button>
+                  <button onClick={(e)=>{e.preventDefault();SIGN_UP_MANUAL(); console.log("executing mutation")}} className="btn">Sign Up</button>
                 </div>
-                <div className="googleAuth">
-                  <div id='buttonDiv' >Sign Up with Google</div>
+                <div className="googleAuth" onClick={google_sign_in()}>
+                  <div id='buttonDiv'>Sign Up with Google</div>
                 </div>
                 <div className="cl-redirect-login">
                   <div>Already registered? <Link to="" style={{"color":"darkblue"}}>Login</Link></div>
