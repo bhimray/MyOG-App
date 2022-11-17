@@ -95,7 +95,7 @@ type RootQuery {
 }
 
 type RootMutation {
-    googleAuth(token:String):privateData
+    googleAuth(google_credential:String):privateData
   createUser(userInput:userLogin):privateData
   createGarage(garageData:garageDataInput):garageData
   tuneAlarm(tuneData:tuneDataInput):tuneData

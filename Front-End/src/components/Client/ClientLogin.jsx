@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from 'react'
+import React, { useReducer, useContext, useEffect, useRef} from 'react'
 import {Link, Navigate} from 'react-router-dom'
 import HandleCredentialResponse from './GoogleAuth'
 import './ClientLogin.css'
@@ -81,18 +81,59 @@ const ClientLogin = () => {
       console.log("it is rejected")
     })
   }
-  /* global google */
-  function google_sign_in() {
-  google.accounts.id.initialize({
+
+  //
+  const GOOGLE_SIGN_IN_UP = gql`
+  mutation googleAuth($google_credential: String!) {
+    googleAuth(google_credential: $google_credential) {
+      UserId
+      Token
+      TokenExpirationTime
+    }
+  }
+`;
+const [AuthGoogle, { data:googleData, loading:googleLoading, error:googleError }] = useMutation(GOOGLE_SIGN_IN_UP)
+// if (googleData) console.log(googleData)
+useEffect(() => {
+  if (googleData) {
+    console.log(googleData, "sign up returned data")
+    login(googleData.googleAuth)
+  };
+}, [googleData])
+if (googleError) console.log(googleError)
+/* global google */
+const divRef = useRef(null);
+
+useEffect(() => {
+  if (divRef.current) {
+    console.log(divRef.current,"divRef.current-------")
+    window.google.accounts.id.initialize({
+      client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
+      callback: (res, error) => {
+        console.log("google response", res, res.credential)
+        AuthGoogle({variables: {
+          google_credential:res.credential
+        }})
+        console.log("AuthGoogle is executed")
+      },
+    });
+    window.google.accounts.id.renderButton(divRef.current, {
+      theme: 'filled_blue',
+      size: 'medium',
+      type: 'standard',
+      text: 'continue_with',
+    });
+  }
+}, [divRef.current]);
+  {/* window.onload= google.accounts.id.initialize({
       client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
       callback: HandleCredentialResponse
-  })
-}
+    })
   google.accounts.id.renderButton(
       document.getElementById("buttonDiv"),
       { theme: "filled_blue", size: "large", width:"200px" , logo_alignment:"left", text:"Sign Up With Google"}  // customization attributes
   );
-  google.accounts.id.prompt(); // also display the One Tap dialog
+  google.accounts.id.prompt(); // also display the One Tap dialog */}
 
   // mutation
   const [SIGN_UP_MANUAL, { data, loading, error }] = useMutation(SIGN_UP, {
@@ -106,9 +147,10 @@ const ClientLogin = () => {
   useEffect(() => {
     if (data) {
       console.log(data, "sign up returned data")
-      login(data)
+      login(data.createUser)
     };
   }, [data])
+  if (googleLoading) return <div>Authenticating user</div>;
   if (loading) return <div>Loading sign up</div>;
   if (error) setError("Sign up error!!")
   //
@@ -158,7 +200,7 @@ const ClientLogin = () => {
                 <div className="cl-button">
                   <button onClick={(e)=>{e.preventDefault();SIGN_UP_MANUAL(); console.log("executing mutation")}} className="btn">Sign Up</button>
                 </div>
-                <div className="googleAuth" onClick={()=>google_sign_in()}>
+                <div className="googleAuth" ref={divRef}>
                   <div id='buttonDiv'>Sign Up with Google</div>
                 </div>
                 <div className="cl-redirect-login">

@@ -43,13 +43,13 @@ function AuthProvider(props){
     const [state, dispatch] = useReducer(reducer, {'credential':""})
     console.log(state.credential)
     const login=(props)=>{
-        console.log(props, "this is props",props.createUser, "createUser", props.createUser.Token,"props passed to the login function")
+        console.log(props, "this is props",props.Token, "createUser", props.Token,"props passed to the login function")
         // const stringifyToken = props ? JSON.stringify(props):"null";
-        localStorage.setItem('credential', props.createUser.Token);
+        localStorage.setItem('credential', props.Token);
         const decodedToken = localStorage.getItem('credential')
         console.log('decodedToken', jwtDecode(decodedToken))
-        dispatch({type:"login", payload:props.createUser})
-        console.log(props.createUser.token, "this is token")
+        dispatch({type:"login", payload:props})
+        console.log(props, "this is token")
 
     }
     const logout=()=>{
