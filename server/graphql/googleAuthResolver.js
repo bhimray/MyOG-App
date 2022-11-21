@@ -5,13 +5,14 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const UsersDB = require('../mongoDB/user');
 require('dotenv').config()
-const MONGO_DB = process.env.MONGO_URI;
+const JWT_SECRET = "HElloBimlenDra@Gy@DaV12&bilenMYlastNaMe"
+const MONGO_DB =  "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?retryWrites=true&w=majority";
 
 async function verify(credential) {
     console.log("executing google token verification")
     const ticket = await client.verifyIdToken({
         idToken: credential,
-        audience:"89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+        audience:"572374357644-oktb2lbpqhfe9s84nfb60pl425ka76el.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
@@ -20,7 +21,7 @@ async function verify(credential) {
     const anyUser = await UsersDB.findOne({Email:payload['email']});
     if (anyUser){
         console.log(anyUser,"google user exist in db");
-        const Token = jwt.sign({_id:anyUser._id, email:anyUser.Email}, process.env.JWT_SECRET, {expiresIn:1})
+        const Token = jwt.sign({_id:anyUser._id, email:anyUser.Email}, JWT_SECRET, {expiresIn:1})
         return {UserId:anyUser._id, Token:Token, TokenExpirationTime:1}
 
     }else{

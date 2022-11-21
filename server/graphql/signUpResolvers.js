@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 const { userValidationError } = require('../errorHandler')
 const mongoose = require('mongoose');
 require('dotenv').config()
-const MONGO_DB = process.env.MONGO_URI;
+const JWT_SECRET="HElloBimlenDra@Gy@DaV12&bilenMYlastNaMe"
+const MONGO_DB =  "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?retryWrites=true&w=majority";
 module.exports = {
   createUser: async (args, req) => {
     try{
@@ -23,7 +24,7 @@ module.exports = {
       //   }
       // })
       console.log("returned user", returnedUser)
-      const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, process.env.JWT_SECRET, {expiresIn:1})
+      const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
       return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
     } catch (err){
       console.log(err)

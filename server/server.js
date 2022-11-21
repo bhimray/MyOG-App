@@ -7,7 +7,7 @@ const {graphqlHTTP} = require('express-graphql')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-const MONGO_DB = process.env.MONGO_URI;
+const MONGO_DB = "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?retryWrites=true&w=majority";
 const port = process.env.PORT || 5000;
 
 const graphqlSchema = require('./graphql/graphqlSchema')

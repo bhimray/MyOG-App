@@ -108,7 +108,11 @@ useEffect(() => {
   if (divRef.current) {
     console.log(divRef.current,"divRef.current-------")
     window.google.accounts.id.initialize({
-      client_id: "89523596296-rjlpnt4nsdehuimml2is4b8ootid6rgi.apps.googleusercontent.com",
+      Cross_Origin_Opener_Policy: "same-origin-allow-popups",
+      ux_mode:"redirect",
+      select_by:"user",
+      login_uri:"https://myog-app.netlify.app/seller-card",
+      client_id: "572374357644-oktb2lbpqhfe9s84nfb60pl425ka76el.apps.googleusercontent.com",
       callback: (res, error) => {
         console.log("google response", res, res.credential)
         AuthGoogle({variables: {
@@ -117,6 +121,7 @@ useEffect(() => {
         console.log("AuthGoogle is executed")
       },
     });
+    // google.accounts.id.prompt();
     window.google.accounts.id.renderButton(divRef.current, {
       theme: 'filled_blue',
       size: 'medium',

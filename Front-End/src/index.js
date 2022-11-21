@@ -4,18 +4,31 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AuthProvider} from './components/context/localSotrage'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import {setContext} from '@apollo/client/link/context'
 
+//httplink.....
+const htttpLink = createHttpLink({
+  uri:'https://myog-backend.onrender.com'
+})
 
-const client = new ApolloClient({
-  uri: 'http://localhost:5000',
-  cache: new InMemoryCache(),
-});
+const authLink = setContext((_, {headers})=>{
+  return {
+    headers:{
+      ...headers,
+      authorization:localStorage.getItem("token")|| ""
+    }
+  }
+})
+const queryClient = new ApolloClient({
+  link:authLink.concat(htttpLink),
+  cache:new InMemoryCache(),
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthProvider>
-    <ApolloProvider client={client}>
+    <ApolloProvider client={queryClient}>
       <React.StrictMode>
         <App />
       </React.StrictMode>

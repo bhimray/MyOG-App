@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 const { userValidationError } = require('../errorHandler')
 const mongoose = require('mongoose');
 require('dotenv').config()
-const MONGO_DB = process.env.MONGO_URI;
+const JWT_SECRET = "HElloBimlenDra@Gy@DaV12&bilenMYlastNaMe"
+const MONGO_DB =  "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?retryWrites=true&w=majority";
 
 module.exports = {
   userLogin: async (args, req) => {
@@ -44,7 +45,7 @@ module.exports = {
       const decodedPassword = await bcrypt.compare(Password, user.Password)
       console.log(decodedPassword, "this is decoded password")
       if (!decodedPassword) throw userValidationError("Password is incorrect")
-      const Token = jwt.sign({_id:user._id, email:user.Email}, process.env.JWT_SECRET, {expiresIn:1})
+      const Token = jwt.sign({_id:user._id, email:user.Email}, JWT_SECRET, {expiresIn:1})
       console.log(Token, "token")
       return {UserId:user._id, Token:Token, TokenExpirationTime:1}
     } catch (err) {
