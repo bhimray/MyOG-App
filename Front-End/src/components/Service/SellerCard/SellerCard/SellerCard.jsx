@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {sellerData} from './../../../Data/sellerCardData'
 import routeSolid from '../../../../svgIcons/route-solid.svg'
 import './sellerCard.css'
@@ -8,18 +8,31 @@ import carSolid from '../../../../svgIcons/car-solid.svg'
 import busSolid from '../../../../svgIcons/bus-solid.svg'
 import truckSolid from '../../../../svgIcons/truck-solid.svg'
 import {Link} from 'react-router-dom'
+import MapIndex from '../../../Website/Map/MapIndex'
 
 console.log('sellerCardData', sellerData)
+
 const SellerCard = () => {
+  const [showFullMap, setShowFullMap] = useState(false)
   console.log('sellercard.jsx is called')
   let truckBus = 0;
+  const handleDownSlide=()=>{
+    setShowFullMap(true)
+  }
   return (
-    <div className='sc-wrapper'>
+    <>
+    <MapIndex onClick={handleDownSlide} showFullMap={showFullMap}/>
+    {/* {!showFullMap ?<div className='pseudo-div' onClick={()=>handleDownSlide}></div>:null} */}
+    <div className={showFullMap?'sc-main-wrapper sc-main-wrapper-downslide':'sc-main-wrapper'}>
+    <div className={showFullMap?'sc-wrapper sc-wrapper-downslide':'sc-wrapper'}>
+      <div className='sc-wrapper-head' onClick={()=>setShowFullMap(false)}></div>
+      <div className="sc-card-wrapper-maincontainer"> 
+      <div className="sc-card-wrapper-secondcontainer"> 
       {
         sellerData.map((data)=>{
           // console.log(data.image.props.src)
-          return(         
-          <Link to={`/garage/${data.id}`} key={data.id} className='sc-wrapper-card' >
+          return(     
+          <div key={data.id} className='sc-wrapper-card' >
           <div className='sc-status'>
             {data.status}
           </div>
@@ -30,12 +43,13 @@ const SellerCard = () => {
                 {data.Rating}
               </div>
               <div className='sc-dist'>
-                <div className='sc-dist-text'>
+                <div className='sc-dist-text' onClick={()=>setShowFullMap(true)}>
                   {data.Distance} k.m.
                 </div>
                 <img src={routeSolid} alt="" className='sc-dist-icon' />
               </div>
             </div>
+            <Link to={`/garage/${data.id}`}>
             <div className='sc-name-address-photo-service'>
               <div className="sc-name-address-photo">
                 <div className="sc-name">{data.name}</div>
@@ -88,13 +102,19 @@ const SellerCard = () => {
                 )}
               </div>
             </div>
+            </Link>
           </div>
-          </Link>
+          </div>
+          
         ) 
         }
       )
       }
     </div>
+    </div>
+    </div>
+    </div>
+    </>
   )
 }
 

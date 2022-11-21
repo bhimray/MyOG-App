@@ -5,7 +5,7 @@ import ComNav from './components/Website/Home/ComNav/ComNav';
 import HomePage from './components/Website/Home/HomePage/HomePage';
 import MobNav from './components/Website/Home/MobNav/MobNav';
 import LandingPage from './components/Website/Landing/LandingPage';
-import Map from './components/Website/Map/Map';
+import Map from './components/Website/Map/MapIndex';
 import SellerCard from './components/Service/SellerCard/SellerCard/SellerCard'
 import SellerDetails  from './components/Service/SellerCard/sellerDetails/sellerDetails';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

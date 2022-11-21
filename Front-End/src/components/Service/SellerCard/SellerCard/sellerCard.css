@@ -1,4 +1,14 @@
-
+.sc-main-wrapper {
+    position: fixed;
+    display: grid;
+    height: 90vh;
+    bottom:0rem;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    will-change: transform;
+}
 .sc-wrapper {
     position: relative;
     /* overflow-y: scroll; */
@@ -9,15 +19,49 @@
     /* scroll-snap-align: start; */
     /* align-items: center; */
     scroll-behavior: smooth;
-    /* background-color: blueviolet; */
-    top: 1rem;
+    background-color: #0a0aa5;
+    /* top: 2.5rem; */
     /* height: 100vh; */
+    border-radius: 2rem;
+    padding: 1rem;
     padding-bottom: 14rem;
+    
 }
-
+.pseudo-div{
+    position: absolute;
+    top:0rem;
+    left:0rem;
+    height: 100vh;
+    width:100vw;
+}
+.sc-main-wrapper-downslide{
+    bottom: -28rem !important;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    will-change: transform;
+}
+.sc-wrapper-head{
+    position: relative;
+    height: 3rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-bottom: 0.1rem solid blueviolet;
+}
+.sc-card-wrapper-maincontainer{
+    position:fixed;
+    height:70vh;
+    padding-top: 1rem;
+    overflow-y: scroll;
+}
+.sc-card-wrapper-maincontainer{
+    position:relative;
+}
 .sc-wrapper-card {
     margin: 1.2rem;
     position: relative;
+    margin-top: 2rem;
 }
 .sc-status {
     display: flex;

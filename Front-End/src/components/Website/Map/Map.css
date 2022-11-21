@@ -1,0 +1,14 @@
+
+.map-wrapper{
+    position:fixed;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    top:0rem;
+    left:0rem;
+}
+
+.map-container{
+    height:100vh;
+    width: 100vw;
+}
