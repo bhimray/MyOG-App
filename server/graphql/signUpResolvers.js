@@ -9,6 +9,7 @@ const MONGO_DB =  "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?re
 module.exports = {
   createUser: async (args, req) => {
     try{
+      console.log(args.userInput.Password, "++++++++++++++password+++++")
       args.userInput.Password = await bcrypt.hash(args.userInput.Password, 12)
       console.log(args.userInput.Password, "hashed_password")
       const user = new userData(args.userInput)

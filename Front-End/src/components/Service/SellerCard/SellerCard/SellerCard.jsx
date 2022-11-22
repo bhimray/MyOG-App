@@ -22,7 +22,19 @@ const SellerCard = () => {
   return (
     <>
     <MapIndex onClick={handleDownSlide} showFullMap={showFullMap}/>
-    {/* {!showFullMap ?<div className='pseudo-div' onClick={()=>handleDownSlide}></div>:null} */}
+    {/* top sliding profile */}
+    <div className="sc-top-profile">
+      <div className="sc-pic-status">
+        <div className="sc-pic"></div>
+        <div className="sc-status"></div>
+        <div className="sc-logout-btn">
+          <div className="sc-button">
+            <button className="b"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div className={showFullMap?'sc-main-wrapper sc-main-wrapper-downslide':'sc-main-wrapper'}>
     <div className={showFullMap?'sc-wrapper sc-wrapper-downslide':'sc-wrapper'}>
       <div className='sc-wrapper-head' onClick={()=>setShowFullMap(false)}></div>
