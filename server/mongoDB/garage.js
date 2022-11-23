@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const garageUsersSchema = new mongoose.Schema({
-    Name: {type:String},
-    Owner: {type:String},
+    FullName: {type:String},
+    GarageName: {type:String},
     Email: {type:String},
     Mobile:{type:String},
     Password: {type:String},

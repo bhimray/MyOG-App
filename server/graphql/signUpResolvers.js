@@ -1,4 +1,5 @@
 const userData = require('../mongoDB/user')
+const garageData = require('../mongoDB/garage')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { userValidationError } = require('../errorHandler')
@@ -33,14 +34,14 @@ module.exports = {
   },
 
   createGarage: async (args, req) => {
-    console.log(args,args.garageData,args.garageData.Name,"args in create garage")
+    console.log(args,args.garageData,args.garageData.FullName,"args in create garage")
     try{
       args.garageData.Password = await bcrypt.hash(args.garageData.Password, 12)
       console.log(args.garageData.Password, "hashed_password")
       const user = new garageData(args.garageData)
       //
       mongoose.connect(MONGO_DB)
-      const returnedUser = user.save().then((res)=>{return res}).catch((err)=>{console.log(err, "error occurred")})
+      const returnedUser = await user.save().then((res)=>{return res}).catch((err)=>{console.log(err, "error occurred")})
       console.log("returned user", returnedUser)
       const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
       return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
