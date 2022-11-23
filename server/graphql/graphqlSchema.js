@@ -32,8 +32,8 @@ type garageData{
 }
 
 input garageDataInput{
-    Name: String
-    Owner: String
+    FullName: String
+    GarageName: String
     Email: String
     Mobile: String
     Password: String
@@ -88,7 +88,8 @@ type tuneData{
 
 type RootQuery {
   userDetails(userLoginInput:userLogin):userData
-  garageDetails(Tag:String):garageData
+  garageFilteration(Tag:String):garageData
+  garageProfile(UserId:String):garageData
   singleGarageDetails(garageDetailsInput:singleGarageInfo):garageData
 }
 
@@ -97,7 +98,7 @@ type RootMutation {
     userLogin(userLoginInput:userLogin):privateData
     googleAuth(google_credential:String):privateData
     createUser(userInput:userLogin):privateData
-    createGarage(garageData:garageDataInput):garageData
+    createGarage(garageData:garageDataInput):privateData
     tuneAlarm(tuneData:tuneDataInput):tuneData
 }
 

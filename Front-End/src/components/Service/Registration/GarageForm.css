@@ -1,16 +1,27 @@
 .gf-wrapper {
     display: grid;
     position: absolute;
-    top: -7rem;
-    /* left: 2rem; */
-    width: 100vw;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+    height: -moz-fit-content;
     height: fit-content;
     padding-bottom: 5rem;
-    background: linear-gradient(to right, #2e577a,#0d182f);
+    background: linear-gradient(to right, #2e577aba,#050418);
     z-index: 9999;
-    /* padding: 0rem 0.5rem; */
+    padding: 0rem 2.5rem;
     border-radius: 1rem 1rem 0rem 0rem;
 }
+.gf-background-img{
+    background-image: url("../../../images/garage-form.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50vh;
+    position: relative;
+    bottom: 5rem;
+}
+
 .gf-wrapper-hide{
     display:none;
 }
@@ -37,7 +48,8 @@
     border: none;
     height: 1.8rem;
     border-radius: 0.2rem;
-    background: honeydew;
+    border-bottom: 0.2rem solid yellow;
+    background: none;
     width: 80%;
     /* line-height: 3rem; */
     font-size: 1.1rem;
@@ -61,6 +73,12 @@ button.gf-register-button {
     border-radius: 0.2rem;
 }
 .gf-example-text {
-    color: whitesmoke;
-    font-size: 0.8rem;
+    color: #6eff00;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+}
+.gf-field {
+    display: grid;
 }

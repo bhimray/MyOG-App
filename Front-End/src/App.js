@@ -38,7 +38,7 @@ function App() {
           <Route path="/" element={<HomePage/>}/>
           <Route path="/signup-form" element={<ClientSignup/>}/>
           <Route path='/seller-card' element={<SellerCard/>}/>
-          <Route path='/garage/:id' element={<SellerDetails/>}/>
+          <Route path='/garage-dashboard/:id' element={<SellerDetails/>}/>
           <Route path='/garage-form' element={<GarageForm/>}/>
           <Route path='/login-form' element={<ClientLogin/>}/>
           {/* <Route path='/client-google-auth' element={<GoogleAuth/>}/> */}

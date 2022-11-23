@@ -158,6 +158,81 @@
 .sc-service-vehicle-type{
 
 }
+/* top profile css*/
+.sc-top-profile {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    /* background-color: #0a0aa5; */
+    /* border: 0.2rem solid #4d4db1; */
+    border-radius: 0rem 0rem 2rem 2rem;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    will-change: transform;
+}
+.sc-top-profile-reverse{
+    position: relative;
+    top: -4rem;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    will-change: transform;
+}
+.sc-top-profile-cont-1{
+    display:grid;
+
+}
+.sc-status-top{
+
+}
+.sc-top-profile-cont{
+    width:100vw;
+    height: fit-content;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: blue;
+    padding:0.5rem 0rem;
+}
+.sc-pic-status{
+    display: flex;
+    padding-left:1rem;
+    gap:1rem;
+}
+.btn-logout{
+    width:fit-content;
+}
+.sc-pic{
+    width:2rem;
+}
+.sc-logout-btn{
+    display: flex;
+    /* justify-content: flex-end; */
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+}
+.sc-button{
+    position: relative;
+    display: flex;
+}
+.upIcon-top-profile {
+    width: 1.3rem;
+    background-color: blue;
+    padding: 0rem 3rem;
+    border-radius: 1rem;
+    transform: rotate(180deg);
+}
+.slide-cont{
+    display: flex;
+    justify-content: center;
+}
+
+
+
 /* 
 
 

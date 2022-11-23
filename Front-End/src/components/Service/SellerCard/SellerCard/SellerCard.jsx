@@ -9,35 +9,62 @@ import busSolid from '../../../../svgIcons/bus-solid.svg'
 import truckSolid from '../../../../svgIcons/truck-solid.svg'
 import {Link} from 'react-router-dom'
 import MapIndex from '../../../Website/Map/MapIndex'
+import { useContext } from 'react'
+import { AuthContext } from '../../../context/localSotrage'
+import {Navigate} from 'react-router-dom'
+import dummyProfile from '../../../../svgIcons/user-solid.svg'
+import upIcon from '../../../../svgIcons/chevron-up-solid.svg'
 
 console.log('sellerCardData', sellerData)
 
 const SellerCard = () => {
+  const {login, logout, token} = useContext(AuthContext)
   const [showFullMap, setShowFullMap] = useState(false)
   console.log('sellercard.jsx is called')
   let truckBus = 0;
-  const handleDownSlide=()=>{
+  const handleDownSlide=(e)=>{
+    e.preventDefault()
     setShowFullMap(true)
   }
+  const handleLogout = (e)=>{
+    e.preventDefault();
+    logout()
+  }
+  if (!token){
+    return <Navigate to='/signup-form'/>
+  }else{
   return (
     <>
     <MapIndex onClick={handleDownSlide} showFullMap={showFullMap}/>
     {/* top sliding profile */}
-    <div className="sc-top-profile">
-      <div className="sc-pic-status">
-        <div className="sc-pic"></div>
-        <div className="sc-status"></div>
-        <div className="sc-logout-btn">
-          <div className="sc-button">
-            <button className="b"></button>
+    <div className={showFullMap?"sc-top-profile-reverse":"sc-top-profile"}>
+      <div className="sc-top-profile-cont-1">
+        <div className='sc-top-profile-cont'>
+          <div className="sc-pic-status">
+            <img src={dummyProfile}className="sc-pic"></img>
+            <div className="sc-status-top">Searching..</div>
+          </div>
+          <div className="sc-logout-btn" onClick={handleLogout}>
+            <div className="sc-button">
+              <button className="btn-logout">Log Out</button>
+            </div>
           </div>
         </div>
+        {/* <div className="slide-info">
+          <div className="slide_cont">
+            <img src={upIcon} alt="" className='upIcon-top-profile' />
+          </div>
+        </div> */}
       </div>
     </div>
 
     <div className={showFullMap?'sc-main-wrapper sc-main-wrapper-downslide':'sc-main-wrapper'}>
     <div className={showFullMap?'sc-wrapper sc-wrapper-downslide':'sc-wrapper'}>
-      <div className='sc-wrapper-head' onClick={()=>setShowFullMap(false)}></div>
+      <div className='sc-wrapper-head' onClick={()=>setShowFullMap(false)}>
+        <div className="slide_cont">
+          <img src={upIcon} alt="" className='upIcon-top-profile' />
+        </div>
+      </div>
       <div className="sc-card-wrapper-maincontainer"> 
       <div className="sc-card-wrapper-secondcontainer"> 
       {
@@ -128,6 +155,7 @@ const SellerCard = () => {
     </div>
     </>
   )
+  }
 }
 
 export default SellerCard

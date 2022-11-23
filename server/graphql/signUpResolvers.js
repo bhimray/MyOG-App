@@ -33,22 +33,18 @@ module.exports = {
   },
 
   createGarage: async (args, req) => {
-    console.log(args.garageData,args.garageData.Name,"args in create garage")
+    console.log(args,args.garageData,args.garageData.Name,"args in create garage")
     try{
       args.garageData.Password = await bcrypt.hash(args.garageData.Password, 12)
       console.log(args.garageData.Password, "hashed_password")
       const user = new garageData(args.garageData)
       //
       mongoose.connect(MONGO_DB)
-      user.save((err, user)=>{
-        if (err){
-          throw userValidationError(err);
-        }else{
-          console.log(user,"user is saved")
-          return user;
-        }
-      })
-      return user;
+      const returnedUser = user.save().then((res)=>{return res}).catch((err)=>{console.log(err, "error occurred")})
+      console.log("returned user", returnedUser)
+      const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
+      return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
+
     } catch (err){
       console.log(err)
     }
