@@ -5,9 +5,14 @@ const garageUsersSchema = new mongoose.Schema({
     GarageName: {type:String},
     Email: {type:String},
     Mobile:{type:String},
+    Address:{type:String},
+    GeoCode:{
+        lat:String,
+        lng:String
+    },
     Password: {type:String},
-    ServiceType:{type:Array},
-    OpeningClosingTime:{type:Array},
+    ServiceType:{type:String},
+    OCTime:{type:Array},
     Customer:[{
         latitude:String,
         longitude:String,

@@ -16,6 +16,7 @@ import GarageForm from './components/Service/Registration/GarageForm';
 import CurrentPosition from './components/Website/Map/currentPosition';
 import ClientSignup from './components/Client/ClientSignup';
 import ClientLogin from './components/Client/ClientLogin';
+import SignupForm from './components/Service/Registration/AdvanceForm';
 
 
 function App() {
@@ -33,13 +34,14 @@ function App() {
       {/* <Map/> */}
       {/* <GoogleAuth/> */}
       {/* <CurrentPosition/> */}
+      {/* <SignupForm/> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/signup-form" element={<ClientSignup/>}/>
           <Route path='/seller-card' element={<SellerCard/>}/>
           <Route path='/garage-dashboard/:id' element={<SellerDetails/>}/>
-          <Route path='/garage-form' element={<GarageForm/>}/>
+          <Route path='/garage-form' element={<CurrentPosition/>}/>
           <Route path='/login-form' element={<ClientLogin/>}/>
           {/* <Route path='/client-google-auth' element={<GoogleAuth/>}/> */}
         </Routes>

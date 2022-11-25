@@ -11,15 +11,41 @@ import {Link} from 'react-router-dom'
 import MapIndex from '../../../Website/Map/MapIndex'
 import { useContext } from 'react'
 import { AuthContext } from '../../../context/localSotrage'
-import {Navigate} from 'react-router-dom'
+import {Navigate, useParams} from 'react-router-dom'
 import dummyProfile from '../../../../svgIcons/user-solid.svg'
 import upIcon from '../../../../svgIcons/chevron-up-solid.svg'
+import {useQuery, gql} from '@apollo/client'
+
 
 console.log('sellerCardData', sellerData)
 
 const SellerCard = () => {
+
   const {login, logout, token} = useContext(AuthContext)
   const [showFullMap, setShowFullMap] = useState(false)
+
+  const GARAGE_CARD_QUERY=gql`
+  query garageFilteration($Tag:String){
+      garageFilteration(Tag:$Tag){
+        GarageName
+        GeoCode{
+          lat
+          lng
+        }
+        Address
+        ServiceType
+        OpeningClosingTime
+      }
+  }
+`
+
+  const {id} = useParams()
+  const {data:garageBrief, loading:briefLoading, error:briefError} = useQuery(GARAGE_CARD_QUERY)
+
+  if (garageBrief) console.log(garageBrief);
+  if (briefLoading) return <div>Loading....</div>;
+  if (briefError) console.log("detailsError",briefError);
+
   console.log('sellercard.jsx is called')
   let truckBus = 0;
   const handleDownSlide=(e)=>{
@@ -68,39 +94,41 @@ const SellerCard = () => {
       <div className="sc-card-wrapper-maincontainer"> 
       <div className="sc-card-wrapper-secondcontainer"> 
       {
-        sellerData.map((data)=>{
+        garageBrief.map((data)=>{
           // console.log(data.image.props.src)
           return(     
-          <div key={data.id} className='sc-wrapper-card' >
+          <div key={data._id} className='sc-wrapper-card'>
           <div className='sc-status'>
-            {data.status}
+            open
           </div>
           <div className='sc-wrapper-partition'>
             <div className='sc-review-dist'>
               <div className='sc-review'>
                 <img src={starRegular} alt="" className="sc-star" />
-                {data.Rating}
+                <div className='sc-rating'>4</div>
               </div>
               <div className='sc-dist'>
                 <div className='sc-dist-text' onClick={()=>setShowFullMap(true)}>
-                  {data.Distance} k.m.
+                  5 k.m.
                 </div>
                 <img src={routeSolid} alt="" className='sc-dist-icon' />
               </div>
             </div>
-            <Link to={`/garage/${data.id}`}>
+            <Link to={`/garage/${data._id}`}>
             <div className='sc-name-address-photo-service'>
               <div className="sc-name-address-photo">
-                <div className="sc-name">{data.name}</div>
+                <div className="sc-name">{data.GarageName}</div>
                 <div className="sc-address-photo">
                   <div className='sc-address'>
-                    {data.Address.map((address)=>{
-                      return(
-                        <>
-                        <div className="sc-bit-address">{address}</div> 
-                        </>
-                      )
-                    })}
+                    {data.Address 
+                    // .map((address)=>{
+                    //   return(
+                    //     <>
+                    //     <div className="sc-bit-address">{address}</div> 
+                    //     </>
+                    //   )
+                    // })
+                    }
                   </div>
                   <img src={data.image.props.src} alt="" className="sc-photo" />
                 </div>

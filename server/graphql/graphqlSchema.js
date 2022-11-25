@@ -19,26 +19,35 @@ input CustomerInput{
     cancelReason:String
     FeedBack:String
 }
-
+type latlngType{
+    lat:String
+    lng:String
+}
 type garageData{
     Name: String
-    Owner: String
+    GarageName: String
     Email: String
     Mobile: String
-    Password: String
+    Address:String
+    GeoCode:latlngType
     ServiceType:[String]
     OpeningClosingTime:[String]
     Customer:[Customer]
 }
-
+input latlng{
+    lat:String
+    lng:String
+}
 input garageDataInput{
     FullName: String
     GarageName: String
     Email: String
     Mobile: String
+    Address:String
+    GeoCode:latlng
     Password: String
-    ServiceType:[String]
-    OpeningClosingTime:[String]
+    ServiceType:String
+    OCTime:[String]
     Customer:[CustomerInput]
 }
 type Status{

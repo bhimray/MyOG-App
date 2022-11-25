@@ -17,14 +17,7 @@ module.exports = {
       //
       mongoose.connect(MONGO_DB)
       const returnedUser = await user.save().then((res)=>{console.log(res,"user saved"); return res}).catch((err)=>err)
-      // (err, user)=>{
-      //   if (err){
-      //     throw userValidationError(err);
-      //   }else{
-      //     console.log("user is saved")
-      //     return user;
-      //   }
-      // })
+     
       console.log("returned user", returnedUser)
       const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
       return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
