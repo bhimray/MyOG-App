@@ -11,7 +11,13 @@
     height: fit-content;
     border-radius: 1rem 1rem 0rem 0rem;
     background: linear-gradient(to right, #2e577a,#0d182f);
-    padding-bottom: 20rem;
+    /* padding-bottom: 20rem; */
+}
+.dm-note{
+    margin-top: 1rem;
+    font-size: larger;
+    font-weight: 600;
+    color: wheat;
 }
 .dm-garage-switch,.dm-client-switch {
     display: flex;

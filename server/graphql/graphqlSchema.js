@@ -1,22 +1,36 @@
 const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
+
+type garageDataError{
+    message:String
+}
+type loginError {
+    emailError: String
+    passwordError:String
+}
+type UserNotFoundError{
+    messsage:String
+}
+  
 type Customer{
+    name:String
     latitude:String
     longitude:String
     date:String
     status:String
     canceledBy:String
-    cancelReason:String
+    canceledReason:String
     FeedBack:String
 }
 input CustomerInput{
+    name:String
     latitude:String
     longitude:String
     date:String
     status:String
     canceledBy:String
-    cancelReason:String
+    canceledReason:String
     FeedBack:String
 }
 type latlngType{
@@ -24,14 +38,19 @@ type latlngType{
     lng:String
 }
 type garageData{
+    _id:String
+    Photo:[String]
+    ProfilePhoto:String
     Name: String
     GarageName: String
     Email: String
     Mobile: String
     Address:String
-    GeoCode:latlngType
-    ServiceType:[String]
+    About:String
+    GeoCode:[Float]
+    ServiceType:String
     OpeningClosingTime:[String]
+    OverallRatings:String
     Customer:[Customer]
 }
 input latlng{
@@ -39,15 +58,20 @@ input latlng{
     lng:String
 }
 input garageDataInput{
+    Tag:String
+    Photo:[String]
+    ProfilePhoto:[String]
     FullName: String
     GarageName: String
     Email: String
     Mobile: String
     Address:String
-    GeoCode:latlng
+    About:String
+    GeoCode:[Float]
     Password: String
     ServiceType:String
     OCTime:[String]
+    OverallRatings:String
     Customer:[CustomerInput]
 }
 type Status{
@@ -62,26 +86,27 @@ type history{
     status:[Status]
 }
 type userData{
-    Name:String,
-    Email:String,
-    Mobile:String,
-    Tag:String,
+    Name:String
+    Email:String
+    Mobile:String
+    Tag:String
     History:[history]
-
 }
+
 input userLogin{
-    Number:String,
-    Name:String,
-    Email:String,
-    Password:String,
+    Number:String
+    Name:String
+    Email:String
+    Password:String
 }
 input singleGarageInfo{
-    garageName:String,
+    garageName:String
     garageId:String
 }
 type privateData{
-    UserId:String,
-    Token:String,
+    Tag:String
+    UserId:String
+    Token:String
     TokenExpirationTime:String
 }
 input tuneDataInput{
@@ -94,17 +119,23 @@ type tuneData{
     latitude:String
     logitude:String
 }
+type garageArray{
+    garages:[garageData]
+}
+union garageInfo = garageArray | garageDataError
+union userInfo = userData | UserNotFoundError
+union loginInfo = loginError | privateData 
 
 type RootQuery {
-  userDetails(userLoginInput:userLogin):userData
-  garageFilteration(Tag:String):garageData
-  garageProfile(UserId:String):garageData
-  singleGarageDetails(garageDetailsInput:singleGarageInfo):garageData
+    userDetails(userLoginInput:userLogin):userInfo
+    garageFilteration(Tag:String):garageInfo
+    garageProfile(UserId:String):garageData
+    singleGarageDetails(garageDetailsInput:singleGarageInfo):userInfo
 }
 
 type RootMutation {
-    garageLogin(garageLoginInput:userLogin):privateData
-    userLogin(userLoginInput:userLogin):privateData
+    garageLogin(garageLoginInput:userLogin):loginInfo
+    userLogin(userLoginInput:userLogin):loginInfo
     googleAuth(google_credential:String):privateData
     createUser(userInput:userLogin):privateData
     createGarage(garageData:garageDataInput):privateData

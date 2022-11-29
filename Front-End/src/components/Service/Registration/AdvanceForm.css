@@ -3,7 +3,18 @@
     text-align: end;
     font-style: italic;
 }
-.gf-form-wrapper{
+.login-botton {
+    /* display: flex !important; */
+    /* width: fit-content !important; */
+    /* margin-bottom: 0.5rem; */
+    /* padding: 0.5rem !important; */
+    /* background-color: #9C9C9C !important; */
+    border-radius: 0.5rem;
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    color: darkblue !important;
+}
+.gf-form-wrapper {
     background-color: cadetblue;
     padding: 1rem;
     border-radius: 1rem;
@@ -44,23 +55,23 @@
     font-size: 1rem;
     font-weight: 700;
 }
-.form-div{
-    height: 100vh;
-    width: 100vw;
+.form-div {
+    height: 93vh;
+    /* width: 100vw; */
 }
-.gf-form-wrapper-1{
+.gf-form-wrapper-1 {
     display: grid;
     /* height: 100vh; */
     align-items: center;
     background-color: darkcyan;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
-.form-step-wrapper{
+.form-step-wrapper {
     display: grid;
-    /* justify-content: space-around; */
-    align-items: center;
-    height:100%;
-    background-color:darkcyan;
+    justify-content: space-around;
+    /* align-items: center; */
+    height: 100%;
+    background-color: darkcyan;
 }
 
 .step-info{
@@ -115,4 +126,11 @@ input[type="range" i] {
     display: flex;
     object-fit: cover;
 
+}
+
+.form-status{
+    font-weight: 800;
+    color: darkblue;
+    border-bottom: 0.2rem solid white;
+    padding: 1rem;
 }

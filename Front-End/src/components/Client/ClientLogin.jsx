@@ -1,19 +1,31 @@
-import React,{useReducer, useEffect, useRef, useContext} from 'react'
+import React,{useState, useReducer, useEffect, useRef, useContext} from 'react'
 import { useMutation, gql } from '@apollo/client';
 import "./ClientSignup.css"
 import { AuthContext } from '../context/localSotrage';
 import { Navigate } from 'react-router-dom';
+
+
 const ClientLogin = () => {
+  const [EmailError, setEmailError] = useState(null)
+  const [PasswordError, setPasswordError] = useState(null)
     /* global google */
     //
-    const {login, token} = useContext(AuthContext)
+    const {login, token, tag} = useContext(AuthContext)
     const GOOGLE_SIGN_IN_UP = gql`
         mutation googleAuth($google_credential: String!) {
         googleAuth(google_credential: $google_credential) {
-            UserId
-            Token
-            TokenExpirationTime
+          Tag
+          UserId
+          Token
+          TokenExpirationTime
         }
+        # ... on UserNotFoundError {
+        #   message
+        # }
+        # ... on User {
+        #   id
+        #   login
+        # }
     }
     `;
     const [AuthGoogle, { data:googleData, loading:googleLoading, error:googleError }] = useMutation(GOOGLE_SIGN_IN_UP)
@@ -92,11 +104,19 @@ const ClientLogin = () => {
 
     const LOGIN = gql`
         mutation userLogin($email: String, $mobile:String, $password:String) {
-        userLogin(userLoginInput:{Email:$email, Number:$mobile, Password:$password}) {
-            UserId
-            Token
-            TokenExpirationTime
+        userLogin(userLoginInput:{Email:$email, Number:$mobile, Password:$password}){
+        __typename
+        ... on privateData{
+          Tag
+          UserId
+          Token
+          TokenExpirationTime
         }
+        ... on loginError{
+          emailError
+          passwordError
+        }
+      }
     }
     `;    
 
@@ -108,37 +128,65 @@ const ClientLogin = () => {
         }
     })
     useEffect(() => {
-        if (LoginData) {
+        if (LoginData?.userLogin.__typename === 'privateData') {
           console.log(LoginData, "sign up returned data")
           login(LoginData.userLogin)
         };
+        if (LoginData?.userLogin.__typename === 'loginError'){
+          const emailError = LoginData.userLogin.emailError
+          const passwordError = LoginData.userLogin.passwordError
+          if (emailError){
+             (()=>setEmailError(emailError))()
+          }
+          if (passwordError) {
+            (()=>setPasswordError(passwordError))()
+          }
+          console.log("there is loginError", LoginData?.userLogin)
+          // setUserError(LoginData?.userLogin.)
+        }
       }, [LoginData])
     // if (LoginData) {
     //     console.log("Login data laoded", LoginData)
     //     login()
     // }
     if (LoginLoading) return <div>Loading...</div>
+     
     if (LoginError) console.log("Login error", LoginError)
 
-    if (token){
+    if (token && tag === 'USER'){
         return <Navigate to="/seller-card"/>
     }else{
   return (
     <div>
-         <form action="" className="signup-form">
-                <div className="cl-profile-photo"></div>
-                <div className="cl-input-container">
-                  <div className="cl-input-labels">
-                    <label htmlFor="">Email</label>
-                    <input value={inputValue.email} type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' onChange={(e)=>handleInputChange(e,e.target.value, "email")}/>
+         <form action="" className="form-div">
+                <div className="gf-form-wrapper-top">
+                <div className="gf-form-wrapper">
+                  <div className="gf-field">
+                    <label htmlFor="" className='gf-example-text'>Email</label>
+                    <input className="text-input" 
+                    value={inputValue.email} type="email" 
+                    pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' 
+                    onChange={(e)=>handleInputChange(e,e.target.value, "email")}
+                    onTouchStart={(e)=>{e.preventDefault();setEmailError(null)}}
+                    />
+                    <div>{EmailError? EmailError:null}</div>
                   </div>
-                  <div className="cl-input-labels">
+                  {/* <div className="cl-input-labels">
                     <label htmlFor="">Mobile Number</label>
-                    <input value={inputValue.mobilenumber} type="text"  pattern='/^[7-9][0-9]{9}$/' onChange={(e)=>handleInputChange(e,e.target.value, "mobilenumber")}/>
-                  </div>
+                    <input value={inputValue.mobilenumber} type="text"  
+                    pattern='/^[7-9][0-9]{9}$/' 
+                    onChange={(e)=>handleInputChange(e,e.target.value, "mobilenumber")}
+                    
+                    />
+
+                  </div> */}
                   <div className="cl-input-labels">
                     <label htmlFor="">Password</label>
-                    <input value={inputValue?.password} type="password" onChange={(e)=>handleInputChange(e,e.target.value, "password")}/>
+                    <input value={inputValue?.password} type="password" 
+                    onChange={(e)=>handleInputChange(e,e.target.value, "password")} 
+                    onTouchStart={(e)=>{e.preventDefault();setPasswordError(null)}}
+                    />
+                    <div className='ui-error'>{PasswordError? PasswordError:null}</div>
                   </div>
                   <br/>
                   <div className="button-wrapper" onClick={Login}>
@@ -148,7 +196,8 @@ const ClientLogin = () => {
                   </div>
                   {/* {inputValue?.re_enter_password?.length !== inputValue?.password?.length && inputValue?.re_enter_password !== inputValue?.password ? <div syle={{"color":"red", "font-size":"0.6rem"}}>password does not match</div>:"null"} */}
                 </div>
-              </form>
+              </div>
+            </form>
     </div>
   )
     }

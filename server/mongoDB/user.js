@@ -5,7 +5,7 @@ const usersDBSchema = new mongoose.Schema({
     Email: {type:String},
     Mobile:{type:String},
     Password: {type:String},
-    Tag:{type:Array},
+    Tag:{type:String},
     History:[{
         latitude:String,
         longitude:String,

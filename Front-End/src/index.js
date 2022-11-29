@@ -9,7 +9,10 @@ import {setContext} from '@apollo/client/link/context'
 
 //httplink.....
 const htttpLink = createHttpLink({
-  uri:'http://localhost:5000'
+  uri:
+  // 'http://localhost:5000'
+  'https://myog-backend.onrender.com'
+
 })
 
 const authLink = setContext((_, {headers})=>{

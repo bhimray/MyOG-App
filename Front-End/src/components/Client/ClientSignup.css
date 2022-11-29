@@ -17,25 +17,29 @@
     bottom: 5rem;
 }
 .form-container {
-    position: relative;
-    background-color: rgb(209 182 182 / 70%);
+    position: absolute;
+    background-color: #008b8bd6;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     opacity: 1;
-    height: fit-content;
-    border-radius: 2rem;
-    top: -18rem;
+    padding-bottom: 1rem;
+    bottom: 0rem;
+    width: 100%;
+}
+.gf-form-wrapper-top{
     display: grid;
-    /* justify-content: center; */
-    /* align-items: center; */
-    gap: 0rem;
-    padding-bottom: 5rem;
+    height: 100vh;
+    align-items: center;
+    background-color: darkcyan;
+    padding: 1rem;
 }
 .signup-form {
     position: relative;
     display: grid;
-    justify-content: center;
+    /* justify-content: center; */
+    height: -moz-fit-content;
     height: fit-content;
+    padding: 0rem 1rem;
 }
 .cl-input-labels{
     display:grid;
@@ -46,7 +50,7 @@
 }
 .cl-input-labels>div>input, .cl-input-labels>input {
     border: none;
-    border-bottom: 0.2rem solid black;
+    border-bottom: 0.1rem solid black;
     /* text-align: start; */
     /* height: 2rem; */
     background-color: transparent;
@@ -57,6 +61,7 @@
     line-height: 0px;
     padding-top: 1rem;
     color: #030334;
+    width:100%;
 }
 .cl-input-labels>div>img{
     width: 1rem;
@@ -65,6 +70,9 @@
     padding: 0.2rem;
     border-radius: 50%;
     box-shadow: 1px 2px 6px 2px #000000b8, -3px -4px 11px 4px white;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
 }
 .btn{
     border: none;
@@ -95,9 +103,13 @@
     /* height: fit-content; */
     display: grid;
     gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .googleAuth{
     display: flex;
     justify-content: center;
+}
+.password-input-wrapper{
+    position:relative;
 }

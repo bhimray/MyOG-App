@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect, createContext } from "react";
 import {
   GoogleMap,
   MarkerF,
@@ -7,19 +7,18 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import Places from "./Places";
-import Distance from "./Distance";
 import './Map.css'
 
-const Map = () => {
+const Map = ({garageData, center, direction}) => {
   /* global google */
-  // const center = useMemo(() => (), [])
-  const [center, setCenter]= useState({lat:"", lng:""})
+
+  console.log("GarageGeoCode in map", garageData, center)
   const [readableAddress, setReadableAddress] = useState("")
-  const [direction, setDirection] = useState()
+  const [direction1, setDirection1] = useState()
   const [garages, setGarages] = useState()
 
   const fetchDirection = (garage) => {
+    console.log(garage, center, "while fetching direction")
     if (!center.lat) return;
 
     const service = new google.maps.DirectionsService();
@@ -32,65 +31,25 @@ const Map = () => {
       (result, status) => {
         if (status === "OK" && result) {
           console.log(result, "results of the directions selected")
-          setDirection(result);
+          setDirection1(result);
         }
       }
     );
   };
-  const generateHouses = (position) => {
-    const _houses = [];
-    for (let i = 0; i < 100; i++) {
-      const direction = Math.random() < 0.5 ? -2 : 2;
-      _houses.push({
-        lat: position.lat + Math.random() / direction,
-        lng: position.lng + Math.random() / direction,
+  const generateGarages = (garages) => {
+    const _garagesLocation = [];
+    for (let geoCode of garages) {
+      const direction = geoCode.GeoCode;
+      _garagesLocation.push({
+        lat: direction[0],
+        lng: direction[1],
       });
     }
-    return _houses;
+    return _garagesLocation;
   };
   useEffect(() => {
-    setGarages(()=>center?.lat ?generateHouses(center):null)
+    setGarages(()=>center?.lat ? generateGarages(garageData):null)
   }, [center])
-  
-
-  useEffect(() => {
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    };
-    
-    function success(pos) {
-      var crd = pos.coords;
-    
-      console.log('Your current position is:');
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
-      setCenter(prevState=>({...prevState, lat:crd.latitude, lng:crd.longitude}))
-    };
-    
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    };
-    
-    navigator.geolocation.getCurrentPosition(success, error, options);// 1st provide center position
-    // if (navigator.geolocation){
-    //   navigator.geolocation.getCurrentPosition(
-    //     function (position){setCenter(prevState=>({...prevState, lat:position.coords.latitude, lng:position.coords.longitude}))},
-    //     failure => {
-    //       if (failure.message.startsWith("Only secure origins are allowed")) {
-    //       console.log(failure)
-    //       }
-    //     },
-    //     {maximumAge:600000, timeout:5000, enableHighAccuracy: true}
-    //   )
-    //   // console.log(position, "currentPosition")
-    // }else{
-    //   console.log("error finding navigator in device")
-    // }
-    
-  }, [navigator.geolocation])
   
   const getAddress = (center)=>{
     if (center.lat){
@@ -107,7 +66,7 @@ const Map = () => {
   
   return (
     <div className="map-wrapper">
-      {center.lat?
+      {center?.lat?
       <GoogleMap 
       zoom={18}
       center={center}
@@ -116,23 +75,29 @@ const Map = () => {
         <MarkerF position={center}></MarkerF>
         {/* <Circle center={center} radius={500} options={closeOptions}/> */}
         
-        {garages?.map((garage) => {
+        {garages?.map((garage, i) => {
           console.log(garage,"this is garage")
-          return(<MarkerF
-            key={garage.lat}
-            position={garage}
+          const position = {lat:garage.lat, lng:garage.lng}
+          console.log(position, "position")
+          return(
+          <div key={i}>
+          {position.lat ?
+          <MarkerF
+            key={i}
+            position={google.maps.LatLng(position)}
             // clusterer={clusterer}
             onClick={() => {
-              fetchDirection(garage);
+              fetchDirection(position);
             }}
-          />
+          />:null}
+          </div>
           )})
         }
 
         {/* showing direction on map */}
         {direction && (
             <DirectionsRenderer
-              directions={direction}
+              directions={direction||direction1}
               options={{
                 polylineOptions: {
                   zIndex: 50,

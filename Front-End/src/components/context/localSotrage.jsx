@@ -13,7 +13,9 @@ if (localStorage.getItem('credential') === String){
 const contextValue={
     login:(props)=>{},
     logout:()=>{},
-    token:""
+    token:"",
+    tag:"",
+    userId:"",
 }
 const AuthContext = createContext(contextValue)
 
@@ -32,15 +34,31 @@ function AuthProvider(props){
         // ✅ return a new object
         return {
             ...state,
-            credential:null
+            credential:null,
+            tag:null,
+            userId:null
         };
+        }
+        case 'tag': {
+            // ✅ return a new object
+            return {
+                ...state,
+                tag:payload
+            };
+        }
+        case 'UserId': {
+            // ✅ return a new object
+            return {
+                ...state,
+                userId:payload
+            };
         }
       default:
         return state
       }
     }
     
-    const [state, dispatch] = useReducer(reducer, {'credential':""})
+    const [state, dispatch] = useReducer(reducer, {'credential':"", "tag":"", "userId":""})
     console.log(state.credential)
     const login=(props)=>{
         console.log(props, "this is props",props.Token, "createUser", props.Token,"props passed to the login function")
@@ -49,6 +67,8 @@ function AuthProvider(props){
         const decodedToken = localStorage.getItem('credential')
         console.log('decodedToken', jwtDecode(decodedToken))
         dispatch({type:"login", payload:props})
+        dispatch({type:"tag", payload:props.Tag})
+        dispatch({type:"userId", payload:props.UserId})
         console.log(props, "this is token")
 
     }
@@ -57,7 +77,7 @@ function AuthProvider(props){
         dispatch({type:"logout"})
     }
     return (
-        <AuthContext.Provider value={{login, logout, token:state.credential}} {...props}>
+        <AuthContext.Provider value={{login, logout, token:state.credential, tag:state.tag}} {...props}>
             
         </AuthContext.Provider>
     )

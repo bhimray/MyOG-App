@@ -16,6 +16,7 @@ module.exports = {
 
     },
     garageFilteration: async (args, req) => {
+        
         await mongoose.connect(MONGO_DB);
         console.log("finding garage data for card");
         if (!args){
@@ -27,7 +28,10 @@ module.exports = {
         const garages = await garageData.find().then((res)=>{
             return res
         });
-        return garages;
+        console.log(garages,"garages")
+        const garry = {__typename:'garageArray', garages}
+        console.log(garry, "garry----")
+        return garry;
     },
     
 }

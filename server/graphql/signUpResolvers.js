@@ -12,6 +12,7 @@ module.exports = {
     try{
       console.log(args.userInput.Password, "++++++++++++++password+++++")
       args.userInput.Password = await bcrypt.hash(args.userInput.Password, 12)
+      args.userInput.Tag = "USER"
       console.log(args.userInput.Password, "hashed_password")
       const user = new userData(args.userInput)
       //
@@ -20,7 +21,7 @@ module.exports = {
      
       console.log("returned user", returnedUser)
       const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
-      return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
+      return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1, Tag:returnedUser.Tag}
     } catch (err){
       console.log(err)
     }
@@ -31,13 +32,15 @@ module.exports = {
     try{
       args.garageData.Password = await bcrypt.hash(args.garageData.Password, 12)
       console.log(args.garageData.Password, "hashed_password")
+      args.garageData.Tag = "GARAGE"
+      console.log(args, "check tag")
       const user = new garageData(args.garageData)
       //
       mongoose.connect(MONGO_DB)
       const returnedUser = await user.save().then((res)=>{return res}).catch((err)=>{console.log(err, "error occurred")})
       console.log("returned user", returnedUser)
       const Token = jwt.sign({_id:returnedUser._id, email:returnedUser.Email}, JWT_SECRET, {expiresIn:1})
-      return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1}
+      return {UserId:returnedUser._id, Token:Token, TokenExpirationTime:1, Tag:returnedUser.Tag}
 
     } catch (err){
       console.log(err)

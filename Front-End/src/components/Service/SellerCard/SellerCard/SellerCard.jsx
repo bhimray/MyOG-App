@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {sellerData} from './../../../Data/sellerCardData'
 import routeSolid from '../../../../svgIcons/route-solid.svg'
 import './sellerCard.css'
@@ -18,31 +18,131 @@ import {useQuery, gql} from '@apollo/client'
 
 
 console.log('sellerCardData', sellerData)
-
 const SellerCard = () => {
-
-  const {login, logout, token} = useContext(AuthContext)
-  const [showFullMap, setShowFullMap] = useState(false)
-
+  /* global google */
+  const dummyGarage = sellerData.find((dataId)=>dataId.id == "1")
   const GARAGE_CARD_QUERY=gql`
-  query garageFilteration($Tag:String){
-      garageFilteration(Tag:$Tag){
-        GarageName
-        GeoCode{
-          lat
-          lng
+  query garageFilteration{
+    garageFilteration{
+      __typename
+      ... on garageArray{
+        garages{
+          _id
+          ProfilePhoto
+          GarageName
+          GeoCode
+          Address
+          ServiceType
+          OpeningClosingTime
+          OverallRatings
         }
-        Address
-        ServiceType
-        OpeningClosingTime
       }
+      ... on garageDataError{
+        message
+      }
+      } 
+    }
+  `
+  const {logout, token} = useContext(AuthContext)
+  console.log(">>>>>>> token from authcontext", token)
+  const logoutFn = logout
+  const [showFullMap, setShowFullMap] = useState(false)
+  // const [GarageGeoCode, setGarageGeoCode] = useState([])
+  // const [distance, setDistance] = useState(null);
+  const [center, setCenter] = useState({lat:"", lng:""})
+  const [garageData, setGarageData] = useState()
+  const {data:garageBrief, loading:briefLoading, error:briefError} = useQuery(GARAGE_CARD_QUERY )
+  const [direction, setDirection] = useState()
+  var options = {
+    enableHighAccuracy: true,
+    maximumAge: 0,
+  };
+ 
+async function success(pos, GeoCode) {
+    var crd = pos.coords;
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%",crd, garageBrief,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    // console.log(crd, reverseGeocode,"value of the geocode and reverse geocode")
+    // setDistance(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(crd.latitude, crd.longitude), new google.maps.LatLng(GeoCode[0],GeoCode[1])))
   }
-`
 
-  const {id} = useParams()
-  const {data:garageBrief, loading:briefLoading, error:briefError} = useQuery(GARAGE_CARD_QUERY)
+  function errors(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
 
-  if (garageBrief) console.log(garageBrief);
+  const fetchDirection = (garage) => {
+    if (!center.lat) return;
+
+    const service = new google.maps.DirectionsService();
+    service.route(
+      {
+        origin: garage,
+        destination: center,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK" && result) {
+          console.log(result, "results of the directions selected")
+          setDirection(result);
+        }
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      // console.log("finding current position")
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "granted") {
+            // console.log(result.state);
+            // console.log("calling successs function--------------1")
+            //If granted then you can directly call your function here
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                };
+                setCenter(prevState=>({...prevState, lat:pos.lat, lng:pos.lng}))
+              },
+            )
+            
+          } else if (result.state === "prompt") {
+            return navigator.geolocation.getCurrentPosition(success, errors, options);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+            console.log("denied")
+          }
+          // result.onchange = function () {
+          //   console.log(result.state);
+          // };
+        });
+    } else {
+      alert("Sorry geolocation is Not available!");
+    }
+  }, [])
+  
+  // const distCalculator=(GeoCode) => {
+  //   console.log("GeoCode and Current Position______>",GeoCode)
+  //   if (GeoCode[0]){
+  //     // console.log("GeoCode[0]")
+  //     const value =()=>setGarageGeoCode((prev)=>[...prev, GeoCode])
+  //     // const setdistance = ()=> setDistance(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(center.lat, center.lng), new google.maps.LatLng(GeoCode[0],GeoCode[1])))
+  // }
+  // }
+  // console.log("GargeGeoCode in SellerCard", GarageGeoCode)
+  console.log("garage array", garageBrief)
+  useEffect(() => {
+    if (garageBrief) {
+      setGarageData(garageBrief.garageFilteration.garages)
+      // var garageBriefData = garageBrief.garageFilteration.garages
+      console.log("returned value of garage info",garageBrief.garageFilteration.garages)
+      // return <div>garage array data is returned... please check console</div>
+    };
+  }, [garageBrief])
+  
+ 
   if (briefLoading) return <div>Loading....</div>;
   if (briefError) console.log("detailsError",briefError);
 
@@ -54,21 +154,27 @@ const SellerCard = () => {
   }
   const handleLogout = (e)=>{
     e.preventDefault();
-    logout()
+    logoutFn()
   }
   if (!token){
     return <Navigate to='/signup-form'/>
   }else{
   return (
     <>
-    <MapIndex onClick={handleDownSlide} showFullMap={showFullMap}/>
+    <MapIndex 
+      onClick={handleDownSlide} 
+      showFullMap={showFullMap} 
+      garageData = {garageData}
+      center = {center}
+      direction = {direction}
+    />
     {/* top sliding profile */}
     <div className={showFullMap?"sc-top-profile-reverse":"sc-top-profile"}>
       <div className="sc-top-profile-cont-1">
         <div className='sc-top-profile-cont'>
           <div className="sc-pic-status">
             <img src={dummyProfile}className="sc-pic"></img>
-            <div className="sc-status-top">Searching..</div>
+            <div className="sc-status-top"></div>
           </div>
           <div className="sc-logout-btn" onClick={handleLogout}>
             <div className="sc-button">
@@ -94,10 +200,11 @@ const SellerCard = () => {
       <div className="sc-card-wrapper-maincontainer"> 
       <div className="sc-card-wrapper-secondcontainer"> 
       {
-        garageBrief.map((data)=>{
-          // console.log(data.image.props.src)
+        garageData?.map((data, i)=>{
+          // console.log(data.GeoCode[0], new google.maps.LatLng(data.GeoCode[0], data.GeoCode[1]), center.lat,"value inside the mapping function in jsx")
+          // distCalculator(data.GeoCode)
           return(     
-          <div key={data._id} className='sc-wrapper-card'>
+          <div key={i} className='sc-wrapper-card'>
           <div className='sc-status'>
             open
           </div>
@@ -105,59 +212,66 @@ const SellerCard = () => {
             <div className='sc-review-dist'>
               <div className='sc-review'>
                 <img src={starRegular} alt="" className="sc-star" />
-                <div className='sc-rating'>4</div>
+                <div className='sc-rating'>{
+                data.OverallRatings ? data.OverallRatings : null
+                }</div>
               </div>
-              <div className='sc-dist'>
-                <div className='sc-dist-text' onClick={()=>setShowFullMap(true)}>
-                  5 k.m.
+              <div className='sc-dist' onClick={()=>[fetchDirection(new google.maps.LatLng(data.GeoCode[0], data.GeoCode[1])), setShowFullMap(true)]}>
+                <div className='sc-dist-text'>
+                  {
+                  (google.maps.geometry.spherical.computeDistanceBetween(
+                    new google.maps.LatLng(center.lat, center.lng), 
+                    new google.maps.LatLng(data.GeoCode[0],data.GeoCode[1])
+                    )/1000).toFixed(1)
+                  }
                 </div>
                 <img src={routeSolid} alt="" className='sc-dist-icon' />
               </div>
             </div>
-            <Link to={`/garage/${data._id}`}>
+            <Link to={`/garage-profile/${data._id}/${center.lat}/${center.lng}`}>
             <div className='sc-name-address-photo-service'>
               <div className="sc-name-address-photo">
                 <div className="sc-name">{data.GarageName}</div>
                 <div className="sc-address-photo">
                   <div className='sc-address'>
-                    {data.Address 
-                    // .map((address)=>{
-                    //   return(
-                    //     <>
-                    //     <div className="sc-bit-address">{address}</div> 
-                    //     </>
-                    //   )
-                    // })
-                    }
+                    {data.Address}
                   </div>
-                  <img src={data.image.props.src} alt="" className="sc-photo" />
+                  <img 
+                    src={data.ProfilePhoto? data.ProfilePhoto:dummyGarage.image} 
+                    alt="" 
+                    className="sc-photo" 
+                  />
                 </div>
               </div>
               <div className='sc-service-type'>
-                {data.serviceType.map((service1, i)=>{
-                  let service = service1.toLowerCase()
-                  // console.log(typeof(service), "service")
-                  if (service=="bike"){
+                {()=>{
+                  if (data.ServiceType=="Motorbike and cycle"){
                     // const ShowBike=true;
                     return(
                       <>
                       <img src={motorcyleSolid} alt="" className="sc-service-icon" />
-                      <div className='sc-service-vehicle-type'>{service}</div>
+                      <div className='sc-service-vehicle-type'>Bike</div>
                       </>
                     )
-                  }else if (service == "car"){
+                  }else if (data.ServiceType == "Cycle, Motorbike and Car"){
                     // const ShowCar = true;
                     return(
                       <>
+                      <img src={motorcyleSolid} alt="" className="sc-service-icon" />
+                      <div className='sc-service-vehicle-type'>Bike</div>
                       <img src={carSolid} alt="" className="sc-service-icon" />
-                      <div className='sc-service-vehicle-type'>{service}</div>
+                      <div className='sc-service-vehicle-type'>Car</div>
                       </>
                     )
-                  }else if (service == "truck" || service == "bus" && truckBus==0){
+                  }else if ( data.ServiceType =='Heavy vehicles' || data.ServiceType === 'All'){
                     // const ShowTruck = true;
                     truckBus++
                     return(
                       <>
+                      <img src={motorcyleSolid} alt="" className="sc-service-icon" />
+                      <div className='sc-service-vehicle-type'>Bike</div>
+                      <img src={carSolid} alt="" className="sc-service-icon" />
+                      <div className='sc-service-vehicle-type'>Car</div>
                       <img src={truckSolid} alt="" className="sc-service-icon" />
                       <div className='sc-service-vehicle-type'>Truck</div>
                       <img src={busSolid} alt="" className="sc-service-icon" />
@@ -166,7 +280,7 @@ const SellerCard = () => {
                     )
                   }
                 }
-                )}
+              }
               </div>
             </div>
             </Link>
@@ -185,5 +299,6 @@ const SellerCard = () => {
   )
   }
 }
+
 
 export default SellerCard

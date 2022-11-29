@@ -19,7 +19,7 @@
     /* scroll-snap-align: start; */
     /* align-items: center; */
     scroll-behavior: smooth;
-    background-color: #0a0aa5;
+    background-color: darkcyan;
     /* top: 2.5rem; */
     /* height: 100vh; */
     border-radius: 2rem;
@@ -188,19 +188,27 @@
 .sc-status-top{
 
 }
-.sc-top-profile-cont{
-    width:100vw;
-    height: fit-content;
-    display:flex;
-    justify-content:space-between;
-    align-items: center;
-    background-color: blue;
-    padding:0.5rem 0rem;
+.sc-top-profile-cont {
+    width: 100vw;
+    height: -moz-fit-content;
+    /* height: fit-content; */
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    background-color: #269595;
+    padding: 0.5rem 0rem;
+    border-radius: 1rem;
+    margin-top: 0.2rem;
 }
 .sc-pic-status{
     display: flex;
     padding-left:1rem;
     gap:1rem;
+}
+.sc-status-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .btn-logout{
     width:fit-content;
@@ -208,20 +216,23 @@
 .sc-pic{
     width:2rem;
 }
-.sc-logout-btn{
+.sc-logout-btn {
     display: flex;
     /* justify-content: flex-end; */
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
+    /* position: initial; */
+    /* top: 0.5rem; */
+    /* right: 1rem; */
+    align-items: center;
+    justify-content: center;
 }
 .sc-button{
     position: relative;
     display: flex;
+    padding:0.3rem;
 }
 .upIcon-top-profile {
     width: 1.3rem;
-    background-color: blue;
+    background-color: #00ffff54;
     padding: 0rem 3rem;
     border-radius: 1rem;
     transform: rotate(180deg);

@@ -1,11 +1,11 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import nextIcon from "../../../svgIcons/chevron-right-solid.svg"
 import './AdvanceForm.css'
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate , Link} from 'react-router-dom';
 import { useMutation, gql, concat } from '@apollo/client'
 import { AuthContext } from '../../context/localSotrage'
 
@@ -17,7 +17,7 @@ const MyTextInput = ({ label, ...props }) => {
   return (
     <div className="gf-field">
       <label htmlFor={props.id || props.name} className='gf-example-text'>{label}</label>
-      <input className="text-input" {...field} {...props} id="gf-mobile"/>
+      <input className="text-input" {...field} {...props} id="gf-mobile" key={label}/>
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
@@ -71,69 +71,72 @@ const Validation = Yup.object({
     password: Yup.string()
         .min(5,'Password must be minimum 5 character long')
       .required('Required')
-
   })
   
 // And now we can use these
 const SignupForm = ({address}) => {
-    const [step, setStep] = useState(0)
-    console.log(address,"address------------------------")
-    const {login, token} =useContext(AuthContext)
+  const [step, setStep] = useState(0)
+  console.log(address,"address------------------------")
+  const {login, token , tag, userId} =useContext(AuthContext)
 
-    //onSubmit handler
-    const onSubmit = (values) => {
-        console.log("this is values=====================================================", values)
-
-        alert(JSON.stringify(values, null, 2));
-        SignUpGarage({
-            variables:{
-                'FullName': values.fullName,
-                'GarageName': values.garageName,
-                'Email': values.email,
-                'Password':values.password,
-                'Mobile': `${values.mobile}`,
-                'Address': values.address,
-                'GeoCode': [values.latitude, values.longitude],
-                'ServiceType': values.serviceType,
-                'OCTime':[values.opentime, values.closetime]
-            }
-        })
+  //onSubmit handler
+  const onSubmit = (values) => {
+    console.log("this is values=====================================================", values)
+    alert(JSON.stringify(values, null, 2));
+    SignUpGarage({
+      variables:{
+      'FullName': values.fullName,
+      'GarageName': values.garageName,
+      'Email': values.email,
+      'Password':values.password,
+      'Mobile': `${values.mobile}`,
+      'Address': address?.reverseGeocode,
+      'GeoCode': [address?.geocode.lat, address?.geocode.lng],
+      'ServiceType': values.serviceType,
+      'OCTime':[values.opentime, values.closetime]
+      }
+    })
+  }
+  const GARAGE_SIGN_UP = gql`
+    mutation createGarage($FullName:String, $GarageName:String, $Email:String, $Mobile:String, $Password:String, $Address:String, $GeoCode:[Float], $ServiceType:String, $OCTime:[String]) {
+    createGarage(garageData: {FullName:$FullName, GarageName:$GarageName, Email:$Email, Mobile:$Mobile, Password:$Password, Address:$Address, GeoCode:$GeoCode, ServiceType:$ServiceType, OCTime:$OCTime}) {
+      Tag
+      UserId
+      Token
+      TokenExpirationTime
     }
-    const GARAGE_SIGN_UP = gql`
-        mutation createGarage($FullName:String, $GarageName:String, $Email:String, $Mobile:String, $Password:String, $Address:String, $Geocode:latlng, $ServiceType:String, $OCTime:[String]) {
-        createGarage(garageData: {FullName:$FullName, GarageName:$GarageName, Email:$Email, Mobile:$Mobile, Password:$Password, Address:$Address, GeoCode:$Geocode, ServiceType:$ServiceType, OCTime:$OCTime}) {
-            UserId
-            Token
-            TokenExpirationTime
-        }
-        }
-    `;
+  }
+`;
 
-        //initial value
-    const initialValues={
-        fullName: '',
-        email: '',
-        mobile:'',
-        password:'',
-        garageName:'',
-        serviceType:'',
-        address:address?.reverseGeocode,
-        latitude:address?.geocode.lat,
-        longitude:address?.geocode.lng,
-        opentime:'',
-        closetime:'',
-    }
-  const [SignUpGarage, { data:garageData, loading:garageLoading, error:garageError }] = useMutation(GARAGE_SIGN_UP)
-    if (garageData){
-        console.log(garageData)
-        login(garageData.createGarage)
-        }
-    if (garageError) console.log(garageError)
-    if (garageLoading) return <div>Loading Garage Data</div>;
+      //initial value
+  const initialValues={
+      fullName: '',
+      email: '',
+      mobile:'',
+      password:'',
+      garageName:'',
+      serviceType:'',
+      address:'',
+      latitude:'',
+      longitude:'',
+      opentime:'',
+      closetime:'',
+  }
+const [SignUpGarage, { data:garageData, loading:garageLoading, error:garageError }] = useMutation(GARAGE_SIGN_UP)
+  
+  useEffect(() => {
+  if (garageData){
+    console.log(garageData)
+    login(garageData.createGarage)
+  }
+  }, [garageData])
+   
+  if (garageError) console.log(garageError)
+  if (garageLoading) return <div>Loading Garage Data</div>;
 
-    if (token){
-        return <Navigate to={`/garage-dashboard/${garageData.createGarage.UserId}`}/>
-    }else{
+  if (token && tag === 'GARAGE'){
+    return <Navigate to={`/garage-dashboard/${userId}`}/>
+  }else{
   return (
     <>
       <Formik
@@ -142,75 +145,72 @@ const SignupForm = ({address}) => {
         onSubmit={onSubmit}
       >
         <Form className='form-div'>
-            <div className="form-step-wrapper">
-            <div className="step-info">
-                <div className="step-bar">
-                    <div className="step-line"></div>
-                    <div className="step-circle-wrapper">
-                        <div className="step-circle" style={step===0?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
-                        <div className="step-circle" style={step===1?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
-                        <div className="step-circle" style={step===2?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
-                    </div>
-                </div>
-            </div>
+          <div className="form-step-wrapper">
+            {/* <div className="step-info">
+              <div className="step-bar">
+                  <div className="step-line"></div>
+                  <div className="step-circle-wrapper">
+                      <div className="step-circle" style={step===0?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
+                      <div className="step-circle" style={step===1?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
+                      <div className="step-circle" style={step===2?{backgroundColor:"darkblue"}:{backgroundColor:"white"}}></div>
+                  </div>
+              </div>
+            </div> */}
             {step === 0 ?
             <div className='gf-form-wrapper-1'>
-                <div className="gf-form-wrapper">
-                    <label htmlFor="file" className="file-label profile-image">
-                    </label>
-                    <MyTextInput
-                        name="file"
-                        type="file"
-                        accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"
-                    />
-                    
-
-                    <MyTextInput
-                        label="Full Name"
-                        name="fullName"
-                        type="text"
-                        placeholder="Jane"
-                    />
-
-                    <MyTextInput
-                        label="Mobile"
-                        name="mobile"
-                        type="number"
-                        placeholder="9864016596"
-                    />
-
-                    <MyTextInput
-                        label="Email"
-                        name="email"
-                        type="email"
-                        placeholder="jane@gmail.com"
-                    />
-                    <MyTextInput
-                        label="Password"
-                        name="password"
-                        type="password"
-                        placeholder="fkeonsh_45jKL"
-                    />
-                    <div className="shuffle-form" onClick={()=>setStep(1)}>
-                        <div className="shuffle-btn-wrapper">
-                            <button className='shuffle-btn'>Go Next</button>
-                            <img src={nextIcon} alt="" className="next" />
-                        </div>
-                       
-                    </div>                   
-                </div>
+              <div className="gf-form-wrapper">
+                {/* <label htmlFor="file" className="file-label profile-image">
+                </label> */}
+                {/* <MyTextInput
+                  name="file"
+                  type="file"
+                  accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"
+                /> */}
+                <div className='form-status'>{step+1}/3</div>
+                <MyTextInput
+                  label="Full Name"
+                  name="fullName"
+                  type="text"
+                  placeholder="Jane"
+                />
+                <MyTextInput
+                  label="Mobile"
+                  name="mobile"
+                  type="number"
+                  placeholder="9864016596"
+                />
+                <MyTextInput
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="jane@gmail.com"
+                />
+                <MyTextInput
+                  label="Password"
+                  name="password"
+                  type="password"
+                  placeholder="fkeonsh_45jKL"
+                />
+                <div className="shuffle-form" onClick={()=>setStep(1)}>
+                  <div className="shuffle-btn-wrapper">
+                    <button className='shuffle-btn'>Go Next</button>
+                    <img src={nextIcon} alt="" className="next" />
+                  </div> 
+                </div>                   
+              </div>
             </div>
             : null }
             {step === 1 ?
             <div className='gf-form-wrapper-1'>
                 <div className="gf-form-wrapper">
+                <div className='form-status'>{step+1}/3</div>
+
                     <MyTextInput
                         label="Garage Name"
                         name="garageName"
                         type="garage"
                         placeholder="Super Auto Repairs"
                     />
-
                     <MySelect label="Service Offer" name="serviceType" className="serviceType">
                         <option value="">Select a job type</option>
                         <option value="mortobike">Motorbike and cycle</option>
@@ -218,7 +218,6 @@ const SignupForm = ({address}) => {
                         <option value="truck">Heavy vehicles</option>
                         <option value="other">All</option>
                     </MySelect>
-
                     <div className="shuffle-form">
                         <div className="shuffle-btn-wrapper"  onClick={()=>setStep(0)}>
                             <img src={nextIcon} alt="" className="next prev" />
@@ -235,6 +234,8 @@ const SignupForm = ({address}) => {
             {step === 2 ?
             <div className='gf-form-wrapper-1'>
                 <div className="gf-form-wrapper">
+                <div className='form-status'>{step+1}/3</div>
+
                     <MyTextInput
                         label="Address"
                         name="address"
@@ -244,14 +245,14 @@ const SignupForm = ({address}) => {
                     />
 
                     <MyTextInput
-                        label="latitude"
+                        label="Latitude"
                         name="latitude"
                         type="number"
                         placeholder="From google map"
                         value={address?.geocode.lat}
                     />
                     <MyTextInput
-                        label="longitude"
+                        label="Longitude"
                         name="longitude"
                         type="number"
                         placeholder="From google map"
@@ -283,7 +284,10 @@ const SignupForm = ({address}) => {
                 </div>
             </div>
             :null}
+            <div className="login-botton">
+              <div className="login-text">Already have an acccount? <Link to='/garage-login-form'>Log in</Link></div>
             </div>
+          </div>
         </Form>
       </Formik>
     </>

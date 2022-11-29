@@ -189,10 +189,10 @@ useEffect(() => {
                 </div>
               </form>
               <div className="cl-form-outside-container">
-                <div className="cl-consent">
+                {/* <div className="cl-consent">
                   <img src="" alt="" className="cl-consent-img" />
                   <div className="cl-consent-tag">I agree with the <a href="">Terms of use</a></div>
-                </div>
+                </div> */}
                 <div className="cl-button">
                   <button onClick={(e)=>{e.preventDefault();SIGN_UP_MANUAL(); console.log("executing mutation")}} className="btn">Sign Up</button>
                 </div>

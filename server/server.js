@@ -11,7 +11,8 @@ const MONGO_DB = "mongodb+srv://Bilen:GYADAV12@cluster0.xz35uix.mongodb.net/?ret
 const port = process.env.PORT || 5000;
 
 const graphqlSchema = require('./graphql/graphqlSchema')
-const graphqlResolver = require('./graphql/graphqlResolvers')
+const graphqlResolver = require('./graphql/graphqlResolvers');
+const loginResolvers = require('./graphql/loginResolvers');
 
 async function run() {
     // Create a new connection and connect to MongoDB...
@@ -51,12 +52,27 @@ app.use('/',
     // context:{res, userId:req.userId},
     schema:graphqlSchema,
     rootValue:graphqlResolver,
+    // typeResolver:()=>{
+    //   loginInfo: {
+    //     __resolveType: (parameter, context, info) => {
+    //       console.log("==============resolving union types==============")
+    //       // return username ? 'User' : 'Surface'
+    //       if (parameter.Token) {
+    //         return 'privateData';
+    //       }else{
+    //         return 'loginError'
+    //       }
+    //     }
+    //   }
+    // },
     customFormatErrorFn:err=>{
       try{
         err.details = JSON.parse(err.message)//converting error in object from JSON
         err.message = Array.isArray(err.details.error)? err.details.error.join(",") : err.details.error;//checking if the error is array or not
+        console.log("error occurred", err)
         return err; // return error to the front-end
       }catch{
+        console.log("error here", err)
         return err; // cathing the err caused during try{}
       }
     },

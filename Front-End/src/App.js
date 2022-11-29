@@ -1,26 +1,17 @@
 import React,{useState} from 'react';
 import './App.css';
-// import Filter from './components/Website/Filter/Filter';
-import ComNav from './components/Website/Home/ComNav/ComNav';
 import HomePage from './components/Website/Home/HomePage/HomePage';
-import MobNav from './components/Website/Home/MobNav/MobNav';
-import LandingPage from './components/Website/Landing/LandingPage';
-// import Map from './components/Website/Map/MapIndex';
 import SellerCard from './components/Service/SellerCard/SellerCard/SellerCard'
 import SellerDetails  from './components/Service/SellerCard/sellerDetails/sellerDetails';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ClientOrGarage from './components/Service/Registration/ClientOrGarage';
-import DecidingModal from './components/Log/DecidingModal';
-import GarageForm from './components/Service/Registration/GarageForm';
-// import GoogleAuth from './components/Client/GoogleAuth';
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import CurrentPosition from './components/Website/Map/currentPosition';
 import ClientSignup from './components/Client/ClientSignup';
 import ClientLogin from './components/Client/ClientLogin';
-import SignupForm from './components/Service/Registration/AdvanceForm';
-
+import GarageLogin from './components/Service/Registration/GarageLogin';
+import SellerDashBoard from './components/Service/SellerCard/sellerDetails/SellerDashBoard';
+import SharedLayout from './components/SharedLayout/SharedLayout';
 
 function App() {
-
   // const [screenWidth, setScreenWidth] = React.useState(true)
   // React.useEffect(()=>{
   //   console.log("useEffect is running")
@@ -28,7 +19,6 @@ function App() {
   //       setScreenWidth(false)
   //   }
   // },[screenWidth])
-
   return (
     <div className="App" >
       {/* <Map/> */}
@@ -37,13 +27,17 @@ function App() {
       {/* <SignupForm/> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/signup-form" element={<ClientSignup/>}/>
           <Route path='/seller-card' element={<SellerCard/>}/>
-          <Route path='/garage-dashboard/:id' element={<SellerDetails/>}/>
-          <Route path='/garage-form' element={<CurrentPosition/>}/>
-          <Route path='/login-form' element={<ClientLogin/>}/>
-          {/* <Route path='/client-google-auth' element={<GoogleAuth/>}/> */}
+          <Route path='/' element={<SharedLayout/>}>
+            <Route index element={<HomePage/>}/>
+            <Route path="/signup-form" element={<ClientSignup/>}/>
+            <Route path='/garage-profile/:id/:lat/:lng' element={<SellerDetails/>}/>
+            <Route path='/garage-dashboard/:id' element={<SellerDashBoard/>}/>
+            <Route path='/garage-form' element={<CurrentPosition/>}/>
+            <Route path='/login-form' element={<ClientLogin/>}/>
+            <Route path='/garage-login-form' element={<GarageLogin/>}/>
+          </Route>
+          <Route path='*' element={<div>Page does not exist. Return to <Link to='/' style={{color:"blue", fontSize:"2rem"}}>Home</Link></div>}/>
         </Routes>
       </BrowserRouter>
     </div>
