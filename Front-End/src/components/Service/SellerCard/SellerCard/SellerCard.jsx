@@ -45,7 +45,7 @@ const SellerCard = () => {
   `
   const {logout, token} = useContext(AuthContext)
   console.log(">>>>>>> token from authcontext", token)
-  const logoutFn = logout
+  // const logoutFn = logout
   const [showFullMap, setShowFullMap] = useState(false)
   // const [GarageGeoCode, setGarageGeoCode] = useState([])
   // const [distance, setDistance] = useState(null);
@@ -154,7 +154,7 @@ async function success(pos, GeoCode) {
   }
   const handleLogout = (e)=>{
     e.preventDefault();
-    logoutFn()
+    logout()
   }
   if (!token){
     return <Navigate to='/signup-form'/>

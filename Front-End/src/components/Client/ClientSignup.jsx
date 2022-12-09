@@ -6,7 +6,7 @@ import { useState } from 'react'
 import tick from "../../svgIcons/check-solid.svg"
 import { gql, useMutation } from '@apollo/client';
 import { AuthContext } from '../context/localSotrage'
-
+import { useGoogleLogin } from '@react-oauth/google';
 
 const SIGN_UP = gql`
   mutation createUser($name:String, $email:String, $password:String){
@@ -103,33 +103,40 @@ useEffect(() => {
 if (googleError) console.log(googleError)
 /* global google */
 const divRef = useRef(null);
-
-useEffect(() => {
-  if (divRef.current) {
-    console.log(divRef.current,"divRef.current-------")
-    window.google.accounts.id.initialize({
-      Cross_Origin_Opener_Policy: "same-origin-allow-popups",
-      ux_mode:"redirect",
-      select_by:"user",
-      login_uri:"https://myog-app.netlify.app/seller-card",
-      client_id: "572374357644-oktb2lbpqhfe9s84nfb60pl425ka76el.apps.googleusercontent.com",
-      callback: (res, error) => {
-        console.log("google response", res, res.credential)
-        AuthGoogle({variables: {
-          google_credential:res.credential
-        }})
-        console.log("AuthGoogle is executed")
-      },
-    });
-    // google.accounts.id.prompt();
-    window.google.accounts.id.renderButton(divRef.current, {
-      theme: 'filled_blue',
-      size: 'medium',
-      type: 'standard',
-      text: 'continue_with',
-    });
-  }
-}, [divRef.current]);
+const loginGoogle = useGoogleLogin({
+  onSuccess: res => {
+    console.log(res, "google auth res========")
+    AuthGoogle({variables: {
+      google_credential:res.credential
+    }})
+  },
+})
+// useEffect(() => {
+//   if (divRef.current) {
+//     console.log(divRef.current,"divRef.current-------")
+//     window.google.accounts.id.initialize({
+//       // Cross_Origin_Opener_Policy: "same-origin-allow-popups",
+//       // ux_mode:"redirect",
+//       // select_by:"user",
+//       // login_uri:"https://myog-app.netlify.app/",
+//       client_id: "572374357644-oktb2lbpqhfe9s84nfb60pl425ka76el.apps.googleusercontent.com",
+//       callback: (res, error) => {
+//         console.log("google response", res, res.credential)
+//         AuthGoogle({variables: {
+//           google_credential:res.credential
+//         }})
+//         console.log("AuthGoogle is executed")
+//       },
+//     });
+//     google.accounts.id.prompt();
+//     window.google.accounts.id.renderButton(divRef.current, {
+//       theme: 'filled_blue',
+//       size: 'medium',
+//       type: 'standard',
+//       text: 'continue_with',
+//     });
+//   }
+// }, [divRef.current]);
 
   // mutation
   const [SIGN_UP_MANUAL, { data, loading, error }] = useMutation(SIGN_UP, {
@@ -196,9 +203,12 @@ useEffect(() => {
                 <div className="cl-button">
                   <button onClick={(e)=>{e.preventDefault();SIGN_UP_MANUAL(); console.log("executing mutation")}} className="btn">Sign Up</button>
                 </div>
-                <div className="googleAuth" ref={divRef}>
+                {/* <div className="googleAuth" ref={divRef}>
                   <div id='buttonDiv'>Sign Up With Google</div>
-                </div>
+                </div> */}
+                <div className="googleAuth" onClick={() => loginGoogle()}>
+                  Sign in with Google 🚀{' '}
+                </div>;
                 <div className="cl-redirect-login">
                   <div>Already registered? <Link to="/login-form" style={{"color":"darkblue"}}>Login</Link></div>
                 </div>

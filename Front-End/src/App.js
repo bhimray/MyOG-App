@@ -10,6 +10,7 @@ import ClientLogin from './components/Client/ClientLogin';
 import GarageLogin from './components/Service/Registration/GarageLogin';
 import SellerDashBoard from './components/Service/SellerCard/sellerDetails/SellerDashBoard';
 import SharedLayout from './components/SharedLayout/SharedLayout';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   // const [screenWidth, setScreenWidth] = React.useState(true)
@@ -25,9 +26,9 @@ function App() {
       {/* <GoogleAuth/> */}
       {/* <CurrentPosition/> */}
       {/* <SignupForm/> */}
+      <GoogleOAuthProvider clientId="572374357644-oktb2lbpqhfe9s84nfb60pl425ka76el.apps.googleusercontent.com">
       <BrowserRouter>
         <Routes>
-          <Route path='/seller-card' element={<SellerCard/>}/>
           <Route path='/' element={<SharedLayout/>}>
             <Route index element={<HomePage/>}/>
             <Route path="/signup-form" element={<ClientSignup/>}/>
@@ -36,10 +37,12 @@ function App() {
             <Route path='/garage-form' element={<CurrentPosition/>}/>
             <Route path='/login-form' element={<ClientLogin/>}/>
             <Route path='/garage-login-form' element={<GarageLogin/>}/>
+            <Route path='/seller-card' element={<SellerCard/>}/>
           </Route>
           <Route path='*' element={<div>Page does not exist. Return to <Link to='/' style={{color:"blue", fontSize:"2rem"}}>Home</Link></div>}/>
         </Routes>
       </BrowserRouter>
+      </GoogleOAuthProvider>
     </div>
   )
 }
